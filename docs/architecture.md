@@ -11,7 +11,7 @@ flowchart TD
   H --> O
   O --> V[Independent versioned oracles]
   V --> R[Scoped assertion report]
-  R --> J[Hash linked journal and signed checkpoints]
+  R --> J[Hash linked evidence journal]
   J --> X[Independent replay and appeal]
 ```
 
@@ -26,7 +26,7 @@ ITCVE-1 supplies the complete component graph. ISI-1 selects a full integration 
 3. Execution follows the selected environment profile and declared service schedule. Readiness is semantic (expected chain/state), not merely an open port.
 4. Observation captures raw protocol and state evidence with causal identifiers before projection.
 5. Evaluation uses versioned independent predicates and predeclared applicability.
-6. Publication preserves failed and blocked attempts, emits an immutable candidate bundle, and requires review/attestation for official claims.
+6. Publication preserves failed and blocked attempts and requires verified evidence, recorded permissions and an accessible reproduction bundle under the [intake process](intake.md#public-result-admission). Certification follows a separately established program.
 
 ## Sharing efficiently
 

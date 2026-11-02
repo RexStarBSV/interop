@@ -17,9 +17,9 @@ Write as TPNIL, for readers who encounter the repository without its drafting hi
 
 ## Engineering and stewardship
 
-- Preserve private visibility until the authorized steward explicitly authorizes public release under GOVERNANCE.md. Contact with prospective founding participants requires express instruction.
+- Preserve private visibility until the authorized steward explicitly authorizes public release under GOVERNANCE.md. Contact with vendors or other third parties requires express instruction.
 - Apply Apache-2.0 to original project materials. Preserve third-party licenses and the exceptions in THIRD_PARTY_NOTICES.md. Proprietary SUTs retain their own ownership and submission terms.
-- Label synthetic fixtures and results LAB_SELF_TEST_ONLY. SUT conformance requires executed applicable assertions and complete evidence; certification additionally requires the governance gates.
+- Label synthetic fixtures and results LAB_SELF_TEST_ONLY. SUT conformance requires executed applicable assertions and complete evidence; certification requires a separately established program and independent review under GOVERNANCE.md.
 - Freeze standards, artifacts, dependencies, versions, oracles, and criteria before scored runs. Apply the same admission requirements to reference implementations.
 - Preserve accepted journal records and failed attempts. Append corrections with references to the original evidence.
 - Treat `PASS`, `FAIL`, and `BLOCKED` as laboratory data. A completed, verifiable run may contain any of them; execution tooling fails only when the run or evidence contract fails.

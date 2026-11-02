@@ -1,37 +1,39 @@
-# Roadmap and acceptance gates
+# Roadmap
 
-## Gate 0 — ratify the foundation
+[Implementation status](docs/implementation-status.md) records what has run and what remains unproven. This roadmap identifies the next work; individual profiles define their technical prerequisites. Failed or blocked assertions remain valid reported outcomes when the execution and evidence are sound.
 
-The charter, governance, licensing policy, initial candidates, and determinism model establish the foundation. This gate requires adopted technical scopes, resolved initial clause-level interpretations, and passing core integrity, replay, incomplete-evidence, and journal-history checks. Third-party contributions and artifacts require their respective acceptance records. Public release follows a separate steward decision.
+## Prepare public release
 
-## Gate 1 — establish the production-wallet intake boundary
+- Review repository contents, release assets, workflow logs and artifacts for confidential or operational data before changing visibility.
+- Assemble a public reproduction bundle for an existing result: exact binaries, laboratory source snapshots, dependency versions, fixtures, configuration, evidence and instructions. Verify it from a clean environment without company credentials.
+- Record permissions for distributed artifacts under the [intake process](docs/intake.md). Original project contributions use Apache-2.0; vendor submissions use the [submission terms](legal/ARTIFACT-SUBMISSION-AGREEMENT.md). P2PPSR's Metanet Explorer acceptance is recorded; other submissions retain their own permission status.
+- Verify the public contribution and native-runner access boundaries, and keep the getting-started documentation consistent with the verified setup.
 
-The hybrid execution architecture is adopted under [ISI-4 decision 0003](programs/ISI-4/decisions/0003-hybrid-laboratory.md). The portable application-serving lane, hosted macOS qualification lane, Chromium extension lane, local Android AVD, and repository-scoped KVM Android runner are executable. [Decision 0005](programs/ISI-4/decisions/0005-multi-wallet-execution.md) records the multi-wallet boundary and the first scored run.
+P2PPSR authorizes public release under [governance](GOVERNANCE.md). The experimental release describes its actual coverage and limitations; completing every future profile or establishing certification is separate work.
 
-Yours Wallet 5.1.0 has exact release identity, ordinary initialization, mainnet reporting, isolated service routing, mainnet-format fixture funding, independent oracles, two clean repetitions, and a retained experimental result. Metanet Explorer 1.1.10 has exact AAB identity and native runtime evidence; wallet vectors stop at its ordinary phone-verification boundary. BSV Browser 1.6.1 has source-candidate engineering evidence and awaits a canonical publisher binary. BSV Desktop retains its native baseline while its controlled-service and fixture-state work remains open.
+## Extend production-wallet coverage
 
-Complete the pinned Tart guest as the independent BSV Desktop reconstruction lane. Add an admitted Metanet activation fixture, a publisher BSV Browser artifact, and the remaining device-specific runners without introducing personal identities or public-mainnet spending. Unresolved prerequisites block only their affected vectors.
+The Chromium, macOS and Android lanes are executable. Yours Wallet has two retained experimental runs with mixed passing, failing and blocked outcomes. Metanet Explorer's four controlled-WAB runs passed activation and reached transaction submission; the native wallet response and application task-visibility boundary remains unresolved. BSV Desktop has a qualified native baseline but still needs controlled-service integration. BSV Browser awaits a canonical publisher binary. See the [wallet records](suts/README.md) for evidence and scope.
 
-## Gate 2 — execute the first ToDo sequence
+Next steps:
 
-The deterministic compiled `todo-ts` artifact is retained and its application path is executable. The Yours Wallet lane implements independent create/list/reload/decrypt/redeem assertions and records raw transaction bytes, decoded PushDrop fields, basket state, encryption results, service transitions, and two clean repetitions.
+- Diagnose the Metanet Explorer response boundary using the retained [storage and bridge observations](programs/ISI-4/decisions/0007-controlled-wallet-bridge-observation.md).
+- Complete BSV Desktop's supported service configuration, fixture state and independent reconstruction lane.
+- Expand the permission-denial, alternate-origin and broadcast/recovery assertions, remote-storage substitution and clause-level BRC-100 coverage. Preserve the existing results when new cases or corrected runs are added.
+- Qualify additional platforms using their actual binaries, lawful installation environments and declared integration boundaries.
 
-The initial demonstration has completed V001–V004. V005 and V006 produced repeatable failures, which are retained as results. Complete the V005 permission-denial and alternate-origin corpus, the V006 accepted/rejected/recovery submission schedules, the V007 ISI-3 multi-remote substitution, and the V008 clause-level BRC-100 corpus. Public-mainnet acceptance remains a separate evidence property.
+## Extend independent interoperability checks
 
-## Gate 3 — isolated interoperability boundaries
+Freeze overlay and storage HTTP contracts, add independent state oracles, and execute TypeScript/Go substitution matrices. Cover admission, lookup, synchronization, restart, idempotence, pending/proven/conflicted state, portability and data preservation. Record every tested cell and omission.
 
-Freeze overlay and storage HTTP contracts, extract reviewed method inventories, provide independent canonical state projections and fixtures, and exercise TS/Go cross-implementation matrices. Include transaction admission, lookup, bounded synchronization, restart/resume, idempotence, pending/proven/conflicted state, portability, and no-data-loss checks. Publish every matrix cell and omission.
+## Complete the integrated application scenario
 
-## Gate 4 — integrated scenario and native matrix
+The reference protocol and joined Teranode/Arcade/Merkle/ChainTracks transaction-service profile have retained qualifications. Complete the browser-delivered Synthesis Board and drive it through an admitted BRC-100 wallet so the application and wallet create the qualified board, UHRP and LCH transaction graph through their public interfaces. Repeat the profile and add independent component substitutions before reporting an ISI-1 SUT result.
 
-The standards vectors, board-record contract, content availability, licensed acquisition, reference overlay convergence, Teranode runtime, Arcade submission, Merkle proof, ChainTracks lifecycle and reorganization behavior, missed-callback recovery, restart recovery, and principal negative cases now have passing retained qualifications. The joined infrastructure run carries funding, the board revision, the UHRP advertisement, and the two-payee LCH settlement through one verified transaction graph. [ISI-1 decision 0002](programs/ISI-1/decisions/0002-executable-profiles.md) records how these profiles compose and where their claims stop.
+[ISI-1 decision 0002](programs/ISI-1/decisions/0002-executable-profiles.md) describes the existing infrastructure boundary. A regtest service result and a production-wallet result retain their separate configurations and claims.
 
-Complete the browser-delivered TPNIL Synthesis Board and drive it through an admitted program-controlled BRC-100 wallet. Require the browser and wallet to create the already-qualified GlobalKVStore, UHRP, LCH payment, and content-retrieval graph through their public interfaces. Add independent component substitutions and complete the program's clean repetitions before proposing an ISI-1 SUT result. The pinned Teranode/Arcade/Merkle/ChainTracks closure remains the supporting infrastructure for that work.
+## Independent reproduction and future certification
 
-Connect the resulting service findings to the ISI-4 production-wallet profile with explicit configuration and dependency differences. Do not present a regtest service result as evidence about unchanged mainnet wallet behavior. Qualify device-specific IPA, APK/AAB, Windows, macOS, Linux, Chrome, Safari, Brave, and mobile wallet-browser profiles. Safari qualification requires Safari in a licensed Apple environment.
+An independently administered operator should reconstruct the environment, obtain the exact artifacts, repeat the selected profile and verify the evidence. Test archive retrieval, recovery and result challenges as part of that work.
 
-## Gate 5 — independent laboratory reproduction
-
-A separately administered operator reconstructs the closed environment from the public record, lawfully obtains the exact binaries, repeats the matrix, and independently verifies journals and oracle outputs. Demonstrate recovery, archival retrieval, disputed result handling, and quorum/recusal before any certification launch.
-
-Each gate requires recorded evidence and an assigned owner. No calendar deadline substitutes for meeting a gate. Future testing may add consensus/network policies, additional languages, hardware wallets, alternative storage engines, and new ISIs without changing historical claims.
+Certification remains unavailable. A future program needs separately published criteria and independent review under [governance](GOVERNANCE.md). It does not add a membership or council requirement to ordinary use, contribution or experimental reporting.

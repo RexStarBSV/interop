@@ -30,8 +30,8 @@ Remote storage is the most direct supported candidate integration path. Its conf
 1. Runtime confirmation that required service boundaries are explicitly configurable and observable, or a narrower declared vector scope for any unresolved boundary.
 2. A pinned controlled-service closure and independently validated mainnet-format funding, header, proof, and storage fixtures.
 3. Independent V001–V004 application and transaction oracles, followed by two clean vector repetitions.
-4. Artifact and dependency retention terms for admitted reporting.
+4. Supported artifact and dependency permissions and an accessible reproduction bundle before public reporting, under the [intake process](../../docs/intake.md#public-result-admission).
 
 [The machine-readable intake](bsv-desktop-2.8.5.json) records each criterion and evidence digest. The review command verifies those records and the actual DMG. No ToDo vector, wallet conformance result, or public-mainnet transaction is recorded by this intake.
 
-Native baseline qualification is admitted under [ISI-4 decision 0004](../../programs/ISI-4/decisions/0004-native-qualification-lanes.md). The retained intake record remains unchanged because it describes the evidence available at that review; a later intake review will incorporate the native records after service-boundary evidence is complete.
+Native baseline qualification is admitted under [ISI-4 decision 0004](../../programs/ISI-4/decisions/0004-native-qualification-lanes.md). The archived intake review preserves its original findings. The current machine-readable review uses the new permission format while retaining those technical findings; a successor review will incorporate the later native evidence after service-boundary work is complete.

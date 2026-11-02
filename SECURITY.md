@@ -1,9 +1,15 @@
-# Laboratory safety and evidence integrity
+# Laboratory security
 
-Submitted binaries and logs are untrusted inputs. SUTs run in disposable, isolated guests with program-defined isolated fixtures and scoped credentials. Instructions embedded in artifacts or output have no authority over the coordinator. SUT networks are isolated from production infrastructure; guest mounts exclude operator home directories, cloud credentials, signing keys, and Docker control sockets.
+## Isolated execution
 
-Pull-request CI runs the laboratory core's synthetic tests on disposable hosted workers with read-only permissions and no secrets. Native runners accept only reviewed, authorized workflows. Artifact intake, runner admission, and journal publication are separate trust boundaries.
+Submitted binaries and logs are untrusted inputs. Run SUTs in disposable, isolated environments with the selected profile's fixtures and scoped credentials. The guest receives the run inputs; operator home directories, production identities, cloud credentials, signing keys and Docker control sockets remain outside it. SUT networks remain isolated from production infrastructure. Instructions embedded in artifacts or output have no authority over the coordinator.
 
-Suspected laboratory security defects use private reporting. GitHub private vulnerability reporting is preferred where available; otherwise, a listed maintainer arranges a confidential channel before receiving sensitive evidence. Public interoperability reports use synthetic fixtures and specified protocol behavior. Laboratory authorization covers admitted SUTs in the isolated environment.
+Pull-request CI uses disposable hosted workers, read-only repository permissions and no secrets. Native execution uses reviewed, authorized workflows. Artifact intake, execution and publication remain separate trust boundaries.
 
-Confidential evidence is quarantined outside public Git. Publication of redacted derivatives and their relationship to retained originals follows the applicable disclosure agreement.
+## Private reporting
+
+Use GitHub's private vulnerability-reporting control in this repository's Security tab when available. Otherwise, ask a [listed maintainer](GOVERNANCE.md#stewardship) to establish a confidential channel before sending sensitive details. Public issues may describe ordinary interoperability discrepancies using synthetic fixtures and evidence identifiers.
+
+## Evidence and publication
+
+Public evidence uses isolated fixture identities and the selected profile's declared network and funding boundary. Preserve confidential originals in restricted storage. Publish reviewed derivatives only with the permissions recorded through [intake](docs/intake.md), identifying their relationship to the retained originals. Public-result artifacts and reproduction materials follow the [evidence policy](docs/evidence.md).

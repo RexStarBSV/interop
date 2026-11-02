@@ -21,35 +21,31 @@ All four programs select versioned ITCVE-1 profiles. ISI-4 uses the [production-
 
 ## Run the offline core
 
-Use Node.js 24.7.0 or later; `.nvmrc` pins the CI runtime. These commands require no package installation or external services:
+Use the Node.js version pinned in `.nvmrc` and Python 3. The core needs no npm dependencies or external services:
 
 ```sh
 npm test
 npm run check
 npm run qualify:standards
+npm run verify:journals
 npm run demo
 node bin/tpnil.mjs verify out/demo
 node bin/tpnil.mjs replay out/demo
-node bin/tpnil.mjs run-qualification infra/plans/todo-webroot-qualification.json . out/todo-webroot-run local-operator
-node bin/tpnil.mjs verify-qualification out/todo-webroot-run
-node bin/tpnil.mjs verify-native-qualification journals/native-qualification/2026-09-20/bsv-desktop-2.8.5-macos-arm64-35533034148
-node bin/tpnil.mjs verify-runtime-qualification journals/runtime-qualification/2026-09-20/teranode-synthesis-board-v0.15.9-arm64
-node bin/tpnil.mjs verify-reference-qualification journals/reference-qualification/2026-09-20/synthesis-board-v0.1.0
-node bin/tpnil.mjs verify-component-qualification journals/component-qualification/2026-09-20/arcade-real-teranode-merkle
-node bin/tpnil.mjs verify-component-qualification journals/component-qualification/2026-09-20/arcade-synthesis-board-teranode-merkle
-node bin/tpnil.mjs verify-component-qualification journals/component-qualification/2026-09-20/arcade-merkle-reprocess-recovery
-node bin/tpnil.mjs verify-synthesis-stack journals/synthesis-stack-qualification/2026-09-20/repetition-3
-npm run test:synthesis
-npm run verify:journals
-./scripts/prepare-yours-wallet-run.sh
-npm --prefix synthesis run wallet-lab -- run ../infra/plans/isi4-yours-todo-controlled-services.json ../out/isi4-yours local-operator
 ```
 
-The demo performs a synthetic laboratory self-test, writes a content-addressed result and hash-linked journal to `out/demo`, and verifies repeatability. `npm run qualify:standards` verifies the exact imported BRC-167 and BRC-170 corpora and independently recomputes core CHIRP and LCH invariants. Both carry the `LAB_SELF_TEST_ONLY` designation. Each demo run requires a fresh output directory; for subsequent runs use `node bin/tpnil.mjs demo out/another-run`.
+The demo creates a synthetic `LAB_SELF_TEST_ONLY` result in a fresh `out/demo` directory. For another run, use `node bin/tpnil.mjs demo out/another-run`. Standards qualification verifies the pinned BRC-167/BRC-170 corpora and independently recomputes core invariants; it also produces a laboratory self-test, not SUT conformance.
 
-The qualification commands execute the canonical application-serving test stand and verify retained native, component, runtime, reference-profile, and joined-stack evidence. Infrastructure bundles do not issue SUT conformance. The synthesis package labels its result `LAB_REFERENCE_PROFILE_ONLY`. [Laboratory infrastructure](infra/README.md) defines the reproducible profiles, the one-command joined-stack runner, and their claim boundaries.
+Journal verification checks the retained intake, portable, native, component, runtime, reference and wallet-run evidence without executing the original SUTs. The [operator guide](docs/operator-quickstart.md) covers focused verification, artifact hashing, packaging and recovery.
 
-The [operator guide](docs/operator-quickstart.md) covers artifact hashing, compiled web-root packaging, evidence verification, and journal recovery.
+## Synthesis and wallet execution
+
+Synthesis checks install the locked dependencies and require access to the package registry:
+
+```sh
+npm run test:synthesis
+```
+
+Wallet and native execution additionally require the selected profile's binaries, prepared environment and controlled services. Follow the [wallet execution instructions](docs/operator-quickstart.md#wallet-execution) and [laboratory infrastructure guide](infra/README.md). Infrastructure qualification, the synthesis reference profile and a SUT result retain their distinct claims; [implementation status](docs/implementation-status.md) identifies the current coverage.
 
 ## Documentation and repository map
 

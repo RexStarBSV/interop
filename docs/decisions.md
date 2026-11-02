@@ -17,7 +17,7 @@
 | D-011 | BSV Desktop reference wallet candidate | v2.8.5 exact artifact and two native baselines retained; controlled-service execution pending |
 | D-012 | Reconciled TypeScript/Go storage boundary and synchronization contract | Open: clause-level contract |
 | D-013 | Queued/accepted/seen/mined/rejected states and wallet spendability mapping | Open: clause-level contract; separate-state rule adopted in [ISI-1 decision 0001](../programs/ISI-1/decisions/0001-layered-synthesis.md) |
-| D-014 | Message-board source, GlobalKVStore schema, and LCH rights policy | Direction adopted in [ISI-1 decision 0001](../programs/ISI-1/decisions/0001-layered-synthesis.md): new TPNIL Synthesis Board on current BRC-35/167/170 boundaries; exact record and acquisition profiles remain to be frozen |
+| D-014 | Message-board source, GlobalKVStore schema, and LCH rights policy | Direction adopted in [ISI-1 decision 0001](../programs/ISI-1/decisions/0001-layered-synthesis.md): new TPNIL Synthesis Board on current BRC-35/167/170 boundaries; reference and joined transaction-service profiles qualified; complete browser SUT run pending |
 | D-015 | Native hardware, OS/browser locks, signing rights, archive retention, and resource budget | Open |
 | D-016 | Vendor participation announcements and continued submission hosting/evaluation | [Submission terms](../legal/ARTIFACT-SUBMISSION-AGREEMENT.md); authorized acceptance required |
 | D-017 | Production mainnet wallet artifacts, qualitative intake, and explicitly configured controlled services; no public-mainnet spending | Adopted in [ISI-4 decision 0001](../programs/ISI-4/decisions/0001-production-fidelity.md) |

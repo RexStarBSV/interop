@@ -14,7 +14,13 @@ Run `npm test`, `npm run check` and the Python packaging tests in the [operator 
 
 ## Software submitted for evaluation
 
-Evaluation submissions retain their existing licenses and ownership. They use the [submission terms](legal/ARTIFACT-SUBMISSION-AGREEMENT.md), which are separate from Apache-licensed contributions. They authorize TPNIL evaluations and give everyone continuing rights to use and mirror accepted submissions for broad non-commercial activity connected with TPNIL, including reproduction, education and research. They also permit truthful participation announcements. This limited submission grant excludes resale and unrelated use or redistribution. Identify the vendor, authorized contact, exact artifact digests, applicable licenses and dependencies, and any platform or activation limits. An email or pull-request comment explicitly accepting the terms for those artifacts is sufficient; a separate signed schedule is not required.
+Evaluation submissions retain their existing licenses and ownership. The [submission terms](legal/ARTIFACT-SUBMISSION-AGREEMENT.md) authorize TPNIL evaluations, broad non-commercial TPNIL-related use and mirroring, and truthful participation announcements. They exclude binary resale and unrelated commercial exploitation. Original Apache-licensed project contributions retain their broader rights.
+
+For a vendor submission:
+
+1. Identify the vendor, authorized representative and exact artifacts. A clear reference to an already identified archive is sufficient; TPNIL records its digests.
+2. Expressly accept the submission terms by email, issue, pull-request comment or recorded conversation. No separate signed schedule is required.
+3. Identify dependency licenses and any installation, activation or platform limits needed for continued reproduction.
 
 Ordinary licensed software may also be evaluated without a vendor submission. Such evaluation does not establish vendor participation or additional hosting rights. It supports a public laboratory result only when the public reproduction requirements are also satisfied. The [intake process](docs/intake.md) records the evidence supporting each permission.
 

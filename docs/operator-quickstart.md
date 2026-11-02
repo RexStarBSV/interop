@@ -1,10 +1,8 @@
 # Foundation operator commands
 
-Current tooling uses Node24.22.1 from `.nvmrc`. New run manifests record the
-actual runtime; historical journals retain their original runtime and verdicts.
+Use the Node.js version pinned in `.nvmrc` and Python 3. Record the actual Node and OS versions for each new run; historical journals retain their original runtimes and verdicts. The independent BRC-39 oracle uses Node's [native Argon2 API](https://nodejs.org/api/crypto.html#cryptoargon2algorithm-parameters-callback).
 
-
-Run the dependency-free core with Node 24.7.0 or later (`.nvmrc` pins the CI runtime). The independent BRC-39 oracle uses the [native Argon2 API](https://nodejs.org/api/crypto.html#cryptoargon2algorithm-parameters-callback) introduced in Node 24.7.0. Record the exact Node and OS versions for reproducibility. CI validates the core on a hosted worker; SUT evaluation requires a qualified ITCVE.
+The dependency-free core runs locally. CI validates it on hosted workers; SUT execution uses the selected ITCVE.
 
 ```sh
 npm test
@@ -43,7 +41,11 @@ The [intake contract](intake.md) defines required evidence and exit codes. Its o
 
 `node scripts/verify-published-journals.mjs` verifies retained self-test, intake, portable qualification, and native qualification objects. Native archive verification recomputes its findings without the runner or network; `verify-artifact` separately verifies obtained release bytes against the recorded digest.
 
-Prepare and execute the admitted Yours Wallet profile with:
+## Wallet execution
+
+These commands acquire a publisher binary, install dependencies and execute the declared controlled-service profile. Prepare the required browser/runtime environment under the [infrastructure guide](../infra/README.md) before running the wallet.
+
+Prepare and execute the Yours Wallet profile with:
 
 ```sh
 scripts/prepare-yours-wallet-run.sh

@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+avd_name="${1:-TPNIL_API_36}"
+port="${2:-5570}"
+sdk_root="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-$HOME/Library/Android/sdk}}"
+emulator="$sdk_root/emulator/emulator"
+adb_bin="${ADB:-adb}"
+serial="emulator-$port"
+
+test -x "$emulator"
+"$adb_bin" start-server
+if test "$("$adb_bin" -s "$serial" get-state 2>/dev/null || true)" = device; then
+  "$adb_bin" -s "$serial" emu kill >/dev/null 2>&1 || true
+  for _ in $(seq 1 60); do
+    test "$("$adb_bin" -s "$serial" get-state 2>/dev/null || true)" != device && break
+    sleep 1
+  done
+  test "$("$adb_bin" -s "$serial" get-state 2>/dev/null || true)" != device
+fi
+# ADB may disconnect before QEMU releases its AVD lock.
+for _ in $(seq 1 60); do
+  if ! pgrep -f "[q]emu-system.*${avd_name}" >/dev/null &&
+    ! pgrep -f "[e]mulator.*-avd ${avd_name}" >/dev/null; then
+    break
+  fi
+  sleep 1
+done
+if pgrep -f "[q]emu-system.*${avd_name}" >/dev/null ||
+  pgrep -f "[e]mulator.*-avd ${avd_name}" >/dev/null; then
+  printf 'A previous instance of %s is still running\n' "$avd_name" >&2
+  exit 1
+fi
+avd_directory="${ANDROID_AVD_HOME:-$HOME/.android/avd}/${avd_name}.avd"
+test -f "$avd_directory/config.ini"
+# -wipe-data resets userdata, but a writable system overlay survives. Discard
+# every generated read-write OS partition before installing this run's CA.
+for partition in system vendor product system_ext odm; do
+  rm -f "$avd_directory/${partition}.img.qcow2"
+done
+printf 'discarded prior writable OS overlays for %s\n' "$avd_name"
+"$emulator" -avd "$avd_name" -port "$port" -no-window -no-snapshot -wipe-data \
+  -writable-system -no-boot-anim -gpu swiftshader_indirect -no-audio -no-metrics &
+emulator_pid=$!
+trap 'kill -TERM "$emulator_pid" 2>/dev/null || true' EXIT
+
+for _ in $(seq 1 180); do
+  if ! kill -0 "$emulator_pid" 2>/dev/null; then
+    wait "$emulator_pid" || true
+    printf 'Android emulator exited before completing boot\n' >&2
+    exit 1
+  fi
+  if test "$("$adb_bin" -s "$serial" get-state 2>/dev/null || true)" = "device" && \
+    test "$("$adb_bin" -s "$serial" shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1"; then
+    "$adb_bin" -s "$serial" shell settings put global window_animation_scale 0
+    "$adb_bin" -s "$serial" shell settings put global transition_animation_scale 0
+    "$adb_bin" -s "$serial" shell settings put global animator_duration_scale 0
+    printf 'serial=%s\npid=%s\n' "$serial" "$emulator_pid"
+    trap - EXIT
+    wait "$emulator_pid"
+    exit $?
+  fi
+  sleep 1
+done
+printf 'Android emulator did not complete boot\n' >&2
+exit 1

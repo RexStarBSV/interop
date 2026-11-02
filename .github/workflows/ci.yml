@@ -1,0 +1,32 @@
+name: Foundation checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  offline-core:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: '.nvmrc'
+      - run: printf 'ImageOS=%s\nImageVersion=%s\n' "$ImageOS" "$ImageVersion"
+      - run: npm test
+      - run: npm run check
+      - run: npm run qualify:standards
+      - run: npm ci --prefix synthesis --ignore-scripts
+      - run: npm run typecheck --prefix synthesis
+      - run: npm test --prefix synthesis
+      - run: node scripts/verify-published-journals.mjs
+      - run: python3 -m unittest discover -s test -p 'test_*.py' -v
+      - run: npm run demo
+      - run: node bin/tpnil.mjs verify out/demo
+      - run: node scripts/check-journal-history.mjs "$BASE_SHA"
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}

@@ -1,0 +1,28 @@
+# Decision register
+
+[Decision 0001](../governance/decisions/0001-founding-direction.md) establishes the laboratory's founding policies. Subsequent decisions record participants, rationale, dissent, evidence, and affected requirements.
+
+| ID | Decision or question | State |
+| --- | --- | --- |
+| D-001 | ISI-1 full stack; ISI-2 overlays; ISI-3 storage; ISI-4 wallet/application | Adopted |
+| D-002 | Initial program and environment versions 0.1.0; technical catalogs draft | Adopted |
+| D-003 | Experimental findings; certification only under a separately established program | Adopted |
+| D-004 | P2PPSR stewardship, maintainer-led technical decisions and conflict review | Adopted in [governance](../GOVERNANCE.md) |
+| D-005 | Apache-2.0 original project materials; third-party licenses preserved | Adopted; [scope and exceptions](../LICENSE.md) |
+| D-006 | Private repository; public release by recorded steward decision | Adopted |
+| D-007 | Initial application source p2ppsr/todo-ts | Adopted; compiled candidate built |
+| D-008 | D1 native semantic determinism; D0 controlled byte replay | Adopted |
+| D-009 | Canonical origin https://todo.itcve.test | Draft profile |
+| D-010 | Uniform regtest admission in initial profiles | Superseded for ISI-4 by D-017; retained for unchanged profiles |
+| D-011 | BSV Desktop reference wallet candidate | v2.8.5 exact artifact and two native baselines retained; controlled-service execution pending |
+| D-012 | Reconciled TypeScript/Go storage boundary and synchronization contract | Open: clause-level contract |
+| D-013 | Queued/accepted/seen/mined/rejected states and wallet spendability mapping | Open: clause-level contract; separate-state rule adopted in [ISI-1 decision 0001](../programs/ISI-1/decisions/0001-layered-synthesis.md) |
+| D-014 | Message-board source, GlobalKVStore schema, and LCH rights policy | Direction adopted in [ISI-1 decision 0001](../programs/ISI-1/decisions/0001-layered-synthesis.md): new TPNIL Synthesis Board on current BRC-35/167/170 boundaries; exact record and acquisition profiles remain to be frozen |
+| D-015 | Native hardware, OS/browser locks, signing rights, archive retention, and resource budget | Open |
+| D-016 | Vendor participation announcements and continued submission hosting/evaluation | [Submission terms](../legal/ARTIFACT-SUBMISSION-AGREEMENT.md); authorized acceptance required |
+| D-017 | Production mainnet wallet artifacts, qualitative intake, and explicitly configured controlled services; no public-mainnet spending | Adopted in [ISI-4 decision 0001](../programs/ISI-4/decisions/0001-production-fidelity.md) |
+| D-018 | Native wallet/ToDo execution deferred pending planned, provisioned, and documented laboratory infrastructure | Satisfied for Chromium and Android capacity by [ISI-4 decision 0005](../programs/ISI-4/decisions/0005-multi-wallet-execution.md); BSV Desktop and additional device profiles remain open |
+| D-019 | Layered ISI-1 synthesis with regtest service closure, program-controlled wallets, independent oracles, and a new canonical Synthesis Board | Adopted in [ISI-1 decision 0001](../programs/ISI-1/decisions/0001-layered-synthesis.md) |
+| D-020 | Six executable ISI-4 vectors, retained failed/blocked outcomes, portable Chromium execution, and reproducible Android KVM capacity | Adopted in [ISI-4 decision 0005](../programs/ISI-4/decisions/0005-multi-wallet-execution.md) |
+
+Open and draft items remain prerequisites for the profiles that depend on them.

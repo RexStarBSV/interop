@@ -1,0 +1,27 @@
+# Third-party materials and licensing limits
+
+Original TPNIL materials use [Apache-2.0](LICENSE). The following materials retain their own terms and are excluded from that grant. Their inclusion or use does not establish vendor participation or endorsement.
+
+## Retained Open BSV materials — not relicensed
+
+| Material | Provenance and applicable terms |
+| --- | --- |
+| `fixtures/standards/brc-167/chirp-v1.json` | Imported from `bsv-blockchain/ts-stack` at `f999e0c1aad9a7afd0cbadaaf23841d049af9d5a`; [manifest](fixtures/standards/manifest.json), Open BSV License Version 6 |
+| `fixtures/standards/brc-170/conformance-vectors.json` | Imported from `bsv-blockchain/BRCs` at `9c9b3ecfe1c0b765400812deff57d018a01cf0ec`; [manifest](fixtures/standards/manifest.json), Open BSV License Version 6 |
+| `synthesis/src/lch-reference/` and `synthesis/test/lch-reference.test.ts` | Adapted from the pinned ts-stack LCH reference application; [notices](synthesis/THIRD_PARTY_NOTICES.md) and [unchanged license](synthesis/LICENSES/ts-stack-lch-reference.txt) |
+
+The [retained reference license](LICENSES/Open-BSV-License-6.reference.txt) limits use of the covered software and derivatives to BSV. TPNIL's Apache grant cannot remove those restrictions. These imports require a compatible upstream grant or independent replacement before they can be offered without those restrictions. Running the imported standards suites or synthesis profile remains subject to the applicable upstream terms.
+
+## Dependencies and external software
+
+Resolved npm dependencies, container images, operating systems, native applications and referenced standards retain their respective licenses. `synthesis/package-lock.json` pins npm artifacts; license text in each resolved artifact controls. The pinned `@bsv/sdk`, `@bsv/chirp`, `@bsv/lch`, `@bsv/wallet-toolbox`, authentication middleware and payment middleware artifacts each carry Open BSV License Version 6; see the [synthesis notices](synthesis/THIRD_PARTY_NOTICES.md). This migration supplies no new permissions for those packages, Teranode, Arcade, Merkle Service or other external components. A dependency reference or download script does not relicense its target.
+
+The synthesis package includes both original Apache-licensed material and the Open BSV imports above. Its package metadata points to these notices rather than representing the whole package as unrestricted Apache material.
+
+## Submitted artifacts and retained evidence
+
+`fixtures/artifacts/` contains compiled third-party application material with its own provenance. Software identified in `suts/`, raw third-party content retained under `journals/`, and referenced or archived binaries keep their original terms. Original TPNIL report prose and evaluation tooling use Apache-2.0; embedded third-party content does not acquire that license.
+
+Existing intake records do not establish acceptance of the current submission terms. Vendor participation announcements and continued hosting require the applicable license or an authorized acceptance covering the identified artifacts. Outstanding rights remain unresolved until supported; public availability alone supplies no additional grant.
+
+Historical source-revision identifiers in retained evidence refer to the prelaunch development revisions recorded at execution. Replacing Git history does not change those observations or imply that historical workspaces used the current license.

@@ -1,0 +1,97 @@
+name: ISI-4 Android qualification
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  metanet-explorer:
+    runs-on: [self-hosted, tpnil-android-qa, android-emulator, kvm]
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+          cache: npm
+          cache-dependency-path: synthesis/package-lock.json
+      - name: Materialize exact evaluator dependencies
+        run: scripts/native/android/prepare-controlled-workload.sh
+      - name: Acquire canonical AAB from the private artifact vault
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/tpnil-artifacts" "$RUNNER_TEMP/tpnil-evidence"
+          auth_header="$RUNNER_TEMP/tpnil-github-auth-header"
+          umask 077
+          printf 'Authorization: Bearer %s\n' "$GH_TOKEN" > "$auth_header"
+          trap 'rm -f "$auth_header"' EXIT
+          release_api="https://api.github.com/repos/$GITHUB_REPOSITORY/releases/tags/sut-artifacts-2026-09-20"
+          asset_api="$(
+            curl --fail --silent --show-error --location \
+              --header "@$auth_header" \
+              --header "X-GitHub-Api-Version: 2022-11-28" \
+              "$release_api" |
+              jq --exit-status --raw-output \
+                '.assets[] | select(.name == "metanet-explorer-v1.1.10.aab") | .url'
+          )"
+          aab="$RUNNER_TEMP/tpnil-artifacts/metanet-explorer-v1.1.10.aab"
+          cache_directory="${TPNIL_SUT_ARTIFACT_CACHE:-/runner-cache/tpnil/artifacts}"
+          cached_aab="$cache_directory/metanet-explorer-v1.1.10-8746b803.aab"
+          mkdir -p "$cache_directory"
+          artifact_source=verified-runner-cache
+          if ! test -f "$cached_aab" || \
+            ! test "$(sha256sum "$cached_aab" | awk '{print $1}')" = \
+              8746b80347252bc35606cbefa40325131c9bf79eb6dbd140458766e9d513da3d || \
+            ! test "$(stat -c '%s' "$cached_aab")" = 213058875; then
+            artifact_source=private-artifact-vault
+            incoming="$cached_aab.incoming-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+            rm -f "$incoming"
+            curl --fail --silent --show-error --location \
+              --header "@$auth_header" \
+              --header "Accept: application/octet-stream" \
+              --header "X-GitHub-Api-Version: 2022-11-28" \
+              "$asset_api" --output "$incoming"
+            test "$(sha256sum "$incoming" | awk '{print $1}')" = \
+              8746b80347252bc35606cbefa40325131c9bf79eb6dbd140458766e9d513da3d
+            test "$(stat -c '%s' "$incoming")" = 213058875
+            mv "$incoming" "$cached_aab"
+          fi
+          cp "$cached_aab" "$aab"
+          test "$(sha256sum "$aab" | awk '{print $1}')" = "8746b80347252bc35606cbefa40325131c9bf79eb6dbd140458766e9d513da3d"
+          test "$(stat -c '%s' "$aab")" = "213058875"
+          apk="$RUNNER_TEMP/tpnil-apk/universal.apk"
+          cached_apk="$cache_directory/metanet-explorer-v1.1.10-c8bba03d.apk"
+          mkdir -p "$RUNNER_TEMP/tpnil-apk"
+          {
+            printf 'artifact_source=%s\n' "$artifact_source"
+            if test -f "$cached_apk" &&
+              test "$(sha256sum "$cached_apk" | awk '{print $1}')" = \
+                c8bba03da50a1f8ab61ef3c2ae45aac5d14d42bdb3eae40d709d18ae756b865f; then
+              printf 'apk_source=verified-runner-cache\n'
+              cp "$cached_apk" "$apk"
+            else
+              printf 'apk_source=derived-from-canonical-aab\n'
+              scripts/native/android/bundle-to-universal-apk.sh "$aab" "$RUNNER_TEMP/tpnil-apk"
+              test "$(sha256sum "$apk" | awk '{print $1}')" = \
+                c8bba03da50a1f8ab61ef3c2ae45aac5d14d42bdb3eae40d709d18ae756b865f
+              incoming_apk="$cached_apk.incoming-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+              cp "$apk" "$incoming_apk"
+              mv "$incoming_apk" "$cached_apk"
+            fi
+            sha256sum "$aab" "$apk"
+          } > "$RUNNER_TEMP/tpnil-evidence/derivation.txt"
+      - name: Exercise controlled WAB, UMP, and ToDo vectors
+        env:
+          TPNIL_ANDROID_API: 35
+        run: scripts/native/android/replay-controlled-workload.sh
+      - name: Upload qualification evidence
+        if: always()
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4
+        with:
+          name: metanet-explorer-1.1.10-android-qualification
+          path: ${{ runner.temp }}/tpnil-evidence
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "VENDOR_SUBMISSION_ACCEPTANCE",
+  "statementDate": "2026-11-02",
+  "rightsHolder": "PEER TO PEER PRIVACY SYSTEMS RESEARCH LLC",
+  "representative": "Repository owner, speaking on behalf of the company",
+  "authorityBasis": "The owner expressly states that the company authored the archived binary and that the owner holds the rights to grant the requested permission.",
+  "source": {
+    "kind": "selected realtime conversation transcript",
+    "messageId": null,
+    "scope": "Owner acceptance response concerning the single Metanet Explorer binary already archived in the private repository release. This is an excerpt, not a full conversation export or a digital signature."
+  },
+  "statementVerbatim": "I have those rights. Um, that Metanet Explorer binary was authored by Peer-to-Peer Privacy Systems Research LLC, and the lab is also operated by us. So I hereby accept on behalf of my company",
+  "agreement": {
+    "version": "2.1.0",
+    "path": "journals/submission-acceptance/2026-11-02/metanet-explorer-1.1.10/submission-terms-2.1.0.md",
+    "sha256": "7435d61284f7fde0a021fa3e63f6ad5e3e55cbd4000bd85c823fd44a98e6b836"
+  },
+  "artifact": {
+    "release": "v1.1.10",
+    "sha256": "8746b80347252bc35606cbefa40325131c9bf79eb6dbd140458766e9d513da3d",
+    "size": 213058875,
+    "publisherUrl": "https://github.com/p2ppsr/metanet-explorer-mobile/actions/runs/34056462568/artifacts/9997029382"
+  },
+  "artifactIdentificationBasis": "The conversation identifies the archived Metanet Explorer binary. The exact v1.1.10 AAB digest and byte size are resolved from the existing intake record and retained release metadata; the speaker did not recite the digest.",
+  "scope": {
+    "laboratoryEvaluation": true,
+    "publicReproductionAndMirroring": true,
+    "resultsAndNecessaryEvidencePublication": true,
+    "truthfulParticipationAnnouncements": true,
+    "duration": "Full duration of controlled rights, including renewals/extensions; irrevocable for accepted materials under the retained terms.",
+    "unrelatedUseOrBinaryResale": false,
+    "futureReleasesIncluded": false,
+    "thirdPartyLicensesChanged": false
+  },
+  "affiliationDisclosure": "P2PPSR is both the stated artifact owner and the laboratory operator. This acceptance is not independent technical review or certification.",
+  "pendingEducationClarification": {
+    "statementVerbatim": "No, I think that education is also important",
+    "status": "Policy clarification to be resolved separately. This record does not assert acceptance of an unreviewed later agreement version."
+  },
+  "representationLimits": [
+    "Records the owner's express rights and authority declaration; no independent legal opinion or identity/signature verification is asserted.",
+    "Does not establish that all platform, installation, dependency or replay prerequisites are satisfied.",
+    "Does not cover the separately referenced v1.2.0 binary or other vendor artifacts."
+  ]
+}

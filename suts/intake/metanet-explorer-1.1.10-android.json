@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "id": "metanet-explorer-1.1.10-android-review-v2",
+  "id": "metanet-explorer-1.1.10-android-review-2026-11-02",
   "program": "ISI-4@1.0.0",
   "itcve": "ITCVE-1@1.0.0",
   "profile": "production-wallet-controlled-services",
@@ -19,6 +19,12 @@
       "path": "journals/native-observation/2026-09-20/metanet-explorer-1.1.10-android-arm64/record.json",
       "sha256": "f98351400314edaaf16557bdec43a8e4db6cb4dd0f00e5e3a8871cfd35e27fbb",
       "kind": "runtime-observation"
+    },
+    {
+      "id": "p2ppsr-submission-acceptance-2026-11-02",
+      "path": "journals/submission-acceptance/2026-11-02/metanet-explorer-1.1.10/acceptance.json",
+      "sha256": "19d944ac1610e55ee57d2e2f34c4d093e97dacb95f6ba6c06452d8efd318e5e4",
+      "kind": "rights-record"
     }
   ],
   "criteria": [
@@ -81,29 +87,39 @@
   ],
   "permissions": {
     "evaluate": {
-      "status": "unresolved",
-      "finding": "Applicable license or authorized vendor permission for continued evaluation has not been recorded in this review.",
-      "evidenceIds": []
+      "status": "granted",
+      "finding": "P2PPSR owner expressly accepts retained submission terms v2.1.0 for the identified v1.1.10 AAB on behalf of the stated author/rights holder. TPNIL evaluations are authorized under that grant.",
+      "evidenceIds": [
+        "p2ppsr-submission-acceptance-2026-11-02"
+      ]
     },
     "retain": {
-      "status": "unresolved",
-      "finding": "Permission for continued artifact retention and hosting has not been recorded in this review.",
-      "evidenceIds": []
+      "status": "granted",
+      "finding": "The accepted grant permits continued retention and hosting of the identified submission for TPNIL reproduction for the full duration of controlled rights, surviving withdrawal or replacement.",
+      "evidenceIds": [
+        "p2ppsr-submission-acceptance-2026-11-02"
+      ]
     },
     "redistribute": {
-      "status": "unresolved",
-      "finding": "Permission for public hosting and sharing with independent evaluators has not been recorded in this review.",
-      "evidenceIds": []
+      "status": "granted",
+      "finding": "The accepted grant permits everyone to mirror and distribute exact accepted artifact copies with the same permissions, solely to reproduce TPNIL evaluations and verify their results. Resale and unrelated distribution are outside this grant.",
+      "evidenceIds": [
+        "p2ppsr-submission-acceptance-2026-11-02"
+      ]
     },
     "publishResults": {
-      "status": "unresolved",
-      "finding": "Permission supporting publication of findings and necessary third-party evidence has not been recorded in this review.",
-      "evidenceIds": []
+      "status": "granted",
+      "finding": "The accepted grant permits publication of findings and necessary supporting evidence for the identified submission, including unfavorable results.",
+      "evidenceIds": [
+        "p2ppsr-submission-acceptance-2026-11-02"
+      ]
     },
     "announceParticipation": {
-      "status": "unresolved",
-      "finding": "No authorized acceptance of the current vendor submission terms is recorded; evaluation alone does not establish participation.",
-      "evidenceIds": []
+      "status": "granted",
+      "finding": "The company owner accepts the participation terms on the company's behalf. Truthful P2PPSR/Metanet Explorer participation announcements are authorized; P2PPSR also operates the laboratory and that affiliation must remain clear.",
+      "evidenceIds": [
+        "p2ppsr-submission-acceptance-2026-11-02"
+      ]
     }
   }
 }

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "SUBMISSION_PERMISSION_CLARIFICATION",
+  "statementDate": "2026-11-02",
+  "rightsHolder": "PEER TO PEER PRIVACY SYSTEMS RESEARCH LLC",
+  "representative": "Repository owner, speaking in continuation of the recorded company acceptance",
+  "supplements": {
+    "path": "journals/submission-acceptance/2026-11-02/metanet-explorer-1.1.10/acceptance.json",
+    "sha256": "19d944ac1610e55ee57d2e2f34c4d093e97dacb95f6ba6c06452d8efd318e5e4"
+  },
+  "source": {
+    "kind": "selected realtime conversation transcript",
+    "messageId": null,
+    "scope": "Owner response to clarification of educational use following company acceptance for the archived Metanet Explorer v1.1.10 AAB."
+  },
+  "statementVerbatim": "Yeah, I mean, um someone should definitely be able to use it for education, uh, within the context of of TPNIL. There should be a sort of broad, non-commercial TPNIL adjacent provision that covers all of this without getting bogged down into specific intricacies of particular uses. And that way it's really simple for everybody",
+  "artifact": {
+    "release": "v1.1.10",
+    "sha256": "8746b80347252bc35606cbefa40325131c9bf79eb6dbd140458766e9d513da3d",
+    "size": 213058875,
+    "publisherUrl": "https://github.com/p2ppsr/metanet-explorer-mobile/actions/runs/34056462568/artifacts/9997029382"
+  },
+  "interpretation": "The owner approves a broad non-commercial permission connected with TPNIL, including education, rather than an exhaustive list of specific uses. This supplements the original acceptance for the same archived artifact. Resale and unrelated commercial exploitation remain outside this grant; existing grants and third-party licenses are preserved.",
+  "resultingPolicy": {
+    "version": "2.2.0",
+    "path": "journals/submission-acceptance/2026-11-02/metanet-explorer-1.1.10/submission-terms-2.2.0.md",
+    "sha256": "4eb05b090fe382a1c53af727d189328351552552a4bf140e2056be629b9fa349",
+    "basis": "Prepared to implement the owner's express scope clarification. The speaker did not recite or sign the exact later document text."
+  },
+  "futureReleasesIncluded": false,
+  "thirdPartyLicensesChanged": false
+}

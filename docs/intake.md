@@ -36,15 +36,15 @@ Record five permissions separately, each with a finding, evidence references and
 
 | Permission | Scope |
 | --- | --- |
-| `evaluate` | TPNIL may evaluate the identified artifact; anyone may execute it to reproduce TPNIL evaluations and verify results |
-| `retain` | Anyone may keep and host the artifact solely for TPNIL reproduction for the full rights term |
-| `redistribute` | Anyone may mirror exact artifact copies with the same continuing TPNIL reproduction permissions |
+| `evaluate` | TPNIL may evaluate the identified artifact; anyone may execute it for non-commercial activity connected with TPNIL, including reproduction and education |
+| `retain` | Anyone may keep and host the artifact for non-commercial TPNIL-related activity for the full rights term |
+| `redistribute` | Anyone may mirror exact artifact copies with the same continuing non-commercial TPNIL-related permissions |
 | `publishResults` | Publish findings and the necessary identified evidence |
 | `announceParticipation` | Identify the vendor as a participant in TPNIL communications |
 
 Every `granted` permission requires supporting `rights-record` evidence, such as applicable license text or an authorized acceptance of the [submission terms](../legal/ARTIFACT-SUBMISSION-AGREEMENT.md). A public download URL, technical success or source observation alone does not establish additional rights or vendor participation. Reviewers check the evidence, dependencies and scope; the validator checks structure and digests, not legal authority.
 
-`technicalReadiness` depends on the seven technical criteria. Overall `readiness` additionally requires `evaluate` and `retain` permission. The report separately identifies `publicReproductionAuthorization`, which requires `evaluate`, `retain`, `redistribute` and `publishResults` grants. These must support everyone's continuing rights to reproduce TPNIL evaluations, not a temporary or operator-only license. The limited submission grant excludes resale and unrelated use or redistribution; any separately available broader license rights remain intact. Participation announcements additionally require their own permission. A missing grant does not change a technical verdict. Keep restricted artifacts outside public Git. Public results require both public reproduction authorization and a verified, accessible reproduction bundle; neither technical readiness nor permission checks alone establish reproducibility.
+`technicalReadiness` depends on the seven technical criteria. Overall `readiness` additionally requires `evaluate` and `retain` permission. The report separately identifies `publicReproductionAuthorization`, which requires `evaluate`, `retain`, `redistribute` and `publishResults` grants. These must support everyone's continuing rights to reproduce TPNIL evaluations, not a temporary or operator-only license. The current submission terms also broadly permit non-commercial TPNIL-related education, research, experimentation and preservation; their examples are not an exhaustive list. The limited submission grant excludes resale and unrelated use or redistribution; any separately available broader license rights remain intact. Participation announcements additionally require their own permission. A missing grant does not change a technical verdict. Keep restricted artifacts outside public Git. Public results require both public reproduction authorization and a verified, accessible reproduction bundle; neither technical readiness nor permission checks alone establish reproducibility.
 
 An independent evaluation under existing permissions does not make the vendor a participant. Vendor participation requires the authorized acceptance described in the submission terms, including public hosting, evaluator sharing, findings publication and truthful participation announcements. Source disclosure, a broad contributor IP pledge and a separate governance agreement are unnecessary.
 
@@ -68,7 +68,7 @@ Version 1.0.0 intake files and archived reports retain their original eight crit
 
 ## Public-result admission
 
-Every public laboratory result must identify publicly available exact binaries, evidence, criteria, fixtures, configuration, dependency versions and reproduction instructions. Preserve source and build snapshots needed for laboratory components when historical Git revisions are no longer retrievable. Public mirrors receive the same continuing rights to retain, run and redistribute accepted artifacts solely to reproduce TPNIL evaluations and verify their results; a publisher's withdrawal or discontinued download must not revoke those rights.
+Every public laboratory result must identify publicly available exact binaries, evidence, criteria, fixtures, configuration, dependency versions and reproduction instructions. Preserve source and build snapshots needed for laboratory components when historical Git revisions are no longer retrievable. Public mirrors receive the same continuing rights to retain, run and redistribute accepted artifacts for non-commercial activity connected with TPNIL, including reproduction, education and research; a publisher's withdrawal or discontinued download must not revoke those rights.
 
 Review dependency licenses, installer payloads, activation, entitlements and external-service requirements before admission. Preserve lawful offline installation and activation materials where required. An unresolved right, missing artifact or essential service that cannot be reproduced blocks public-result admission; the work can remain an internal observation. Existing historical evidence is retained without inventing permissions or declaring that its reproduction gaps are resolved.
 

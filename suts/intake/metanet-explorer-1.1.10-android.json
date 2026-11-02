@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "id": "metanet-explorer-1.1.10-android-review-2026-11-02",
+  "id": "metanet-explorer-1.1.10-android-review-2026-11-02-education",
   "program": "ISI-4@1.0.0",
   "itcve": "ITCVE-1@1.0.0",
   "profile": "production-wallet-controlled-services",
@@ -24,6 +24,12 @@
       "id": "p2ppsr-submission-acceptance-2026-11-02",
       "path": "journals/submission-acceptance/2026-11-02/metanet-explorer-1.1.10/acceptance.json",
       "sha256": "19d944ac1610e55ee57d2e2f34c4d093e97dacb95f6ba6c06452d8efd318e5e4",
+      "kind": "rights-record"
+    },
+    {
+      "id": "p2ppsr-noncommercial-tpnil-scope-2026-11-02",
+      "path": "journals/submission-acceptance/2026-11-02/metanet-explorer-1.1.10/education-scope-clarification.json",
+      "sha256": "ab6b7deeed90b61b389086450e363fb311eddaedfca21080ed56cfa7483cfbe8",
       "kind": "rights-record"
     }
   ],
@@ -88,23 +94,26 @@
   "permissions": {
     "evaluate": {
       "status": "granted",
-      "finding": "P2PPSR owner expressly accepts retained submission terms v2.1.0 for the identified v1.1.10 AAB on behalf of the stated author/rights holder. TPNIL evaluations are authorized under that grant.",
+      "finding": "P2PPSR owner expressly accepts retained submission terms v2.1.0 for the identified v1.1.10 AAB on behalf of the stated author/rights holder. TPNIL evaluations are authorized under that grant. The owner subsequently authorizes broad non-commercial TPNIL-related use, including education, research, experimentation and public mirroring; see the recorded scope clarification. Existing grants remain intact.",
       "evidenceIds": [
-        "p2ppsr-submission-acceptance-2026-11-02"
+        "p2ppsr-submission-acceptance-2026-11-02",
+        "p2ppsr-noncommercial-tpnil-scope-2026-11-02"
       ]
     },
     "retain": {
       "status": "granted",
-      "finding": "The accepted grant permits continued retention and hosting of the identified submission for TPNIL reproduction for the full duration of controlled rights, surviving withdrawal or replacement.",
+      "finding": "The accepted grant permits continued retention and hosting of the identified submission for TPNIL reproduction for the full duration of controlled rights, surviving withdrawal or replacement. The owner subsequently authorizes broad non-commercial TPNIL-related use, including education, research, experimentation and public mirroring; see the recorded scope clarification. Existing grants remain intact.",
       "evidenceIds": [
-        "p2ppsr-submission-acceptance-2026-11-02"
+        "p2ppsr-submission-acceptance-2026-11-02",
+        "p2ppsr-noncommercial-tpnil-scope-2026-11-02"
       ]
     },
     "redistribute": {
       "status": "granted",
-      "finding": "The accepted grant permits everyone to mirror and distribute exact accepted artifact copies with the same permissions, solely to reproduce TPNIL evaluations and verify their results. Resale and unrelated distribution are outside this grant.",
+      "finding": "The accepted grant permits everyone to mirror and distribute exact accepted artifact copies with the same permissions, solely to reproduce TPNIL evaluations and verify their results. Resale and unrelated distribution are outside this grant. The owner subsequently authorizes broad non-commercial TPNIL-related use, including education, research, experimentation and public mirroring; see the recorded scope clarification. Existing grants remain intact.",
       "evidenceIds": [
-        "p2ppsr-submission-acceptance-2026-11-02"
+        "p2ppsr-submission-acceptance-2026-11-02",
+        "p2ppsr-noncommercial-tpnil-scope-2026-11-02"
       ]
     },
     "publishResults": {

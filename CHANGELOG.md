@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-- Established lasting public reproduction and mirroring rights for accepted submissions, limited to reproducing TPNIL evaluations; resale and unrelated proprietary use remain outside the grant.
+- Broadened public submission permissions to non-commercial TPNIL-related activity, including education, research, reproduction and preservation, with resale and unrelated commercial exploitation excluded.
+
+- Established lasting public reproduction and mirroring rights for accepted submissions.
 - Added a separate public reproduction authorization finding to intake reports.
 
 - Licensed original project materials under Apache-2.0, with explicit third-party exceptions.

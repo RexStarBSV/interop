@@ -14,7 +14,7 @@ TPNIL maintains Interoperability and Standardization Initiatives (ISIs), the Int
 - Use independent expected outcomes; reference behavior alone does not establish correctness.
 - Report successful, failed, blocked and inconclusive attempts, with coverage and limitations.
 - Preserve raw evidence, exact artifact identities and result corrections.
-- Publish results with exact evaluation artifacts and reproduction materials that anyone may retain, run, host and redistribute solely to reproduce TPNIL evaluations and verify their results.
+- Publish results with exact evaluation artifacts and reproduction materials that anyone may retain, run, host and share for non-commercial activity connected with TPNIL, including reproduction, education and research.
 - Distinguish byte-exact replay from semantic repeatability and disclose reproduction limits.
 - Keep sponsorship and affiliations separate from technical judgment.
 - Use isolated identities and the selected profile's declared funding and network boundary.

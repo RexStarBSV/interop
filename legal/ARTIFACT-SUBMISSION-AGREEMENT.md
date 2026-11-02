@@ -1,21 +1,20 @@
 # Vendor submission terms
 
-Version 2.0.0
+Version 2.1.0
 
-These terms let TPNIL identify participating vendors and continue hosting and evaluating their submissions. They apply to identified software, binaries, documentation and other evaluation materials submitted by an authorized vendor representative. They are separate from the project's Apache-licensed contributions.
+These terms let TPNIL identify participating vendors and let anyone preserve, host and evaluate accepted submissions to reproduce laboratory results. They apply to identified software, binaries, documentation and other evaluation materials submitted by an authorized vendor representative. They are separate from the project's Apache-licensed contributions.
 
 ## Permission for submitted materials
 
-You retain ownership. You grant PEER TO PEER PRIVACY SYSTEMS RESEARCH LLC, operating TPNIL, and its laboratory operators and successors a non-exclusive, worldwide, royalty-free permission to:
+You retain ownership. You grant PEER TO PEER PRIVACY SYSTEMS RESEARCH LLC, operating TPNIL, and its laboratory operators and successors a non-exclusive, worldwide, royalty-free permission to install, execute, test and benchmark the identified submissions in TPNIL evaluations and publish their findings and necessary supporting evidence, including unfavorable results, without requiring advance approval of each report.
 
-- copy, retain, publicly host and distribute the identified submitted materials for interoperability evaluation, reproduction, comparison, education and archival access;
-- install, execute, inspect observable behavior, test and benchmark those materials, and make the packaging or configuration adaptations needed for those activities, identifying changed artifacts separately;
-- share the materials and these evaluation permissions with independent evaluators and archival hosts for the same purposes;
-- publish findings and the supporting evidence and excerpts needed to explain them, including unfavorable results, without requiring advance approval of each report.
+You grant everyone the same non-exclusive, worldwide, royalty-free permission to obtain, install, execute, inspect observable behavior of, copy, retain and host the identified submissions **solely to independently reproduce TPNIL evaluations and verify their results**. This includes distributing exact artifact copies through reproduction archives and mirrors, with these terms and the same reproduction permissions passed to each recipient. Necessary installation, configuration and packaging adaptations are permitted for that purpose, with changed artifacts identified separately and the canonical originals preserved.
 
-This permission lasts for the duration of the rights you control in the accepted materials and cannot be withdrawn for those materials after acceptance. Ending participation or submitting a replacement does not revoke it. The grant covers only rights you own or may license, including rights needed to perform these listed activities. It does not cover unrelated products, unrelated commercial redistribution or independent implementations of your technology.
+These permissions are irrevocable for accepted materials and last for the full duration of the rights you control, including renewals and extensions. They survive withdrawal, replacement releases and changes of operator. Reproduction requires no additional vendor approval, membership or royalty. Independent mirrors retain the same rights for that purpose.
 
-Identify third-party components, license restrictions, confidential material and platform or activation limits before submission. TPNIL records any limits and accepts a vendor submission only when the necessary hosting, sharing and evaluation rights are supported. These terms do not authorize bypassing platform security or third-party licenses. Ordinary evaluation under existing licenses remains possible without vendor participation.
+This submission grant does not authorize selling the submitted binaries, unrelated production or commercial use, rebranding, general-purpose download services, or distribution unrelated to reproducing TPNIL evaluations. Those activities require separate permission from the rights holder. It does not require source disclosure or license unrelated products or independent implementations of your technology. Any broader rights already available under another applicable license remain available; this limited grant does not restrict Apache-licensed project materials or amend third-party licenses.
+
+The grant covers only rights you own or may license that are needed for these activities. Identify third-party components, license restrictions, confidential material and platform or activation limits before submission. TPNIL accepts submissions for public results only when the necessary public reproduction, hosting and onward-sharing rights are supported, including required dependencies. Supply installation materials and lawful offline entitlements where activation or expiration would otherwise prevent continued reproduction. Unresolved replay restrictions block public-result admission. These terms do not authorize bypassing platform security or third-party licenses. Ordinary evaluation under existing licenses remains possible without vendor participation.
 
 ## Participation announcements
 
@@ -25,6 +24,6 @@ Participation does not imply endorsement, certification, a favorable result or a
 
 ## Acceptance
 
-An authorized representative accepts by an email, issue or pull-request comment that identifies the vendor, the submitted artifacts and their SHA-256 digests, and expressly accepts version 2.0.0 of these terms. TPNIL retains that acceptance and the accepted terms with its intake evidence. New releases need new acceptance unless the recorded acceptance expressly covers them. A public release URL, repository access or silence does not establish acceptance.
+An authorized representative accepts by an email, issue or pull-request comment that identifies the vendor, the submitted artifacts and their SHA-256 digests, and expressly accepts version 2.1.0 of these terms. TPNIL retains that acceptance and the accepted terms with its intake evidence. New releases need new acceptance unless the recorded acceptance expressly covers them. A public release URL, repository access or silence does not establish acceptance.
 
 Source disclosure, transfer of ownership, a separate contributor pledge and an agreement to a particular court or governing law are not required. Submissions exclude customer information, production credentials and unrelated confidential data.

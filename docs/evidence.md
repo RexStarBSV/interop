@@ -14,7 +14,9 @@ These mechanisms detect changes relative to a trusted checkpoint. Independent ch
 
 ## Storage and retention
 
-Accepted journal entries and small evidence objects are retained in the repository. Large binaries and raw logs use content-addressed storage with access matching the recorded permissions. Replay requires retrievable artifact bytes as well as their digests.
+Accepted journal entries and small evidence objects are retained in the repository. Public-result binaries and reproduction bundles use publicly accessible, content-addressed archives. Anyone may retain, run and mirror accepted artifacts solely to reproduce TPNIL evaluations and verify their results, with the same continuing reproduction permissions. This limited submission grant excludes resale and unrelated use or redistribution; broader rights available under other licenses remain intact. Preserve exact installation materials, configurations, dependency inventories, fixtures, criteria and evidence needed to reproduce the result. Digests and vendor download links alone are insufficient.
+
+Public-result admission requires verified public reproduction permissions and an accessible reproduction bundle under the [intake process](intake.md#public-result-admission). Unresolved rights or essential replay dependencies keep a result outside public admission. Internal observations may precede that admission.
 
 Public requirements and adjudication history have permanent retention by default. Artifact retention, redistribution, result-publication and participation-publicity permissions are recorded separately under the [intake process](intake.md). Corrections and certification withdrawals are appended as new records referencing the original digest; original results and failed attempts remain retained.
 

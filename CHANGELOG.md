@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Established lasting public reproduction and mirroring rights for accepted submissions, limited to reproducing TPNIL evaluations; resale and unrelated proprietary use remain outside the grant.
+- Added a separate public reproduction authorization finding to intake reports.
+
 - Licensed original project materials under Apache-2.0, with explicit third-party exceptions.
 - Simplified governance and contribution rules; retained focused vendor submission permissions.
 - Separated technical intake readiness, evaluation authorization, hosting rights and participation announcements.

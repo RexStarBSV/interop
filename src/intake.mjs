@@ -6,6 +6,7 @@ import { digest, hashJson, parseJson } from './json.mjs';
 
 const technicalCriteria = ['artifact-identity', 'production-fidelity', 'runner-isolation', 'service-coverage', 'initial-state', 'observation-coverage', 'repeatability'];
 const actions = ['evaluate', 'retain', 'redistribute', 'publishResults', 'announceParticipation'];
+const reproductionActions = ['evaluate', 'retain', 'redistribute', 'publishResults'];
 
 function evidenceFile(root, relative) {
   safeRelative(relative);
@@ -64,9 +65,12 @@ function summary(record) {
       if (permission.status !== 'granted') unmet.push({ id: `permission:${action}`, status: permission.status, finding: permission.finding });
     }
   }
+  const publicReproductionUnmet = record.schemaVersion === '2.0.0'
+    ? reproductionActions.filter(action => record.permissions[action].status !== 'granted') : [];
   return { schemaVersion: record.schemaVersion, claim: 'INTAKE_REVIEW_ONLY', recordHash: hashJson(record), artifactSha256: record.artifact.sha256,
     readiness: unmet.length ? 'BLOCKED' : 'READY_FOR_EXECUTION', unmet,
     ...(record.schemaVersion === '2.0.0' ? { technicalReadiness, permissions: record.permissions,
+      publicReproductionAuthorization: publicReproductionUnmet.length ? 'BLOCKED' : 'GRANTED', publicReproductionUnmet,
       permittedActions: actions.filter(action => record.permissions[action].status === 'granted') } : {}) };
 }
 

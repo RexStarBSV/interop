@@ -101,8 +101,26 @@ test('current intake permits authorized evaluation without redistribution or par
   assert.equal(report.technicalReadiness, 'READY_FOR_EXECUTION');
   assert.equal(report.readiness, 'READY_FOR_EXECUTION');
   assert.deepEqual(report.permittedActions, ['evaluate', 'retain']);
+  assert.equal(report.publicReproductionAuthorization, 'BLOCKED');
+  assert.deepEqual(report.publicReproductionUnmet, ['redistribute', 'publishResults']);
   assert.equal(report.permissions.announceParticipation.status, 'unresolved');
   assert.equal(report.claim, 'INTAKE_REVIEW_ONLY');
+});
+
+test('public reproduction needs every reproduction permission and is separate from participation publicity', async t => {
+  const { root, record, artifact } = currentFixture(t);
+  for (const action of ['evaluate', 'retain', 'redistribute', 'publishResults']) record.permissions[action].status = 'granted';
+  const report = await reviewIntake(record, artifact, root);
+  assert.equal(report.publicReproductionAuthorization, 'GRANTED');
+  assert.deepEqual(report.publicReproductionUnmet, []);
+  assert.ok(!report.permittedActions.includes('announceParticipation'));
+  for (const action of ['evaluate', 'retain', 'redistribute', 'publishResults']) {
+    const changed = structuredClone(record);
+    changed.permissions[action].status = 'denied';
+    const blocked = await reviewIntake(changed, artifact, root);
+    assert.equal(blocked.publicReproductionAuthorization, 'BLOCKED');
+    assert.deepEqual(blocked.publicReproductionUnmet, [action]);
+  }
 });
 
 test('evaluation and retention authorization independently gate execution without changing technical readiness', async t => {

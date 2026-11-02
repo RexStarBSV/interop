@@ -6,7 +6,7 @@
 
 ## The laboratory
 
-The [charter](CHARTER.md) defines the mission and principles. [Governance](GOVERNANCE.md) describes stewardship, technical decisions and result review. Original materials use [Apache-2.0](LICENSE.md), with [third-party exceptions](THIRD_PARTY_NOTICES.md). Proprietary software may participate under the [submission terms](legal/ARTIFACT-SUBMISSION-AGREEMENT.md) and [intake process](suts/README.md).
+The [charter](CHARTER.md) defines the mission and principles. [Governance](GOVERNANCE.md) describes stewardship, technical decisions and result review. Original materials use [Apache-2.0](LICENSE.md), with [third-party exceptions](THIRD_PARTY_NOTICES.md). Public results require exact artifacts and reproduction materials that anyone may use, retain and mirror to reproduce TPNIL evaluations and verify their results. Proprietary submission permissions exclude resale and unrelated use or redistribution. Proprietary software may participate under the [submission terms](legal/ARTIFACT-SUBMISSION-AGREEMENT.md) and [intake process](suts/README.md).
 
 | Program | Scope | Version | Status |
 | --- | --- | --- | --- |

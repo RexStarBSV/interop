@@ -14,9 +14,9 @@ Run `npm test`, `npm run check` and the Python packaging tests in the [operator 
 
 ## Software submitted for evaluation
 
-Evaluation submissions retain their existing licenses and ownership. They use the [submission terms](legal/ARTIFACT-SUBMISSION-AGREEMENT.md), which are separate from Apache-licensed contributions. They permit public hosting, independent evaluation, continued use of accepted submissions and truthful participation announcements. Identify the vendor, authorized contact, exact artifact digests, applicable licenses and dependencies, and any platform or activation limits. An email or pull-request comment explicitly accepting the terms for those artifacts is sufficient; a separate signed schedule is not required.
+Evaluation submissions retain their existing licenses and ownership. They use the [submission terms](legal/ARTIFACT-SUBMISSION-AGREEMENT.md), which are separate from Apache-licensed contributions. They authorize TPNIL evaluations and give everyone continuing rights to obtain, run and mirror accepted submissions solely to reproduce TPNIL evaluations and verify their results. They also permit truthful participation announcements. This limited submission grant excludes resale and unrelated use or redistribution. Identify the vendor, authorized contact, exact artifact digests, applicable licenses and dependencies, and any platform or activation limits. An email or pull-request comment explicitly accepting the terms for those artifacts is sufficient; a separate signed schedule is not required.
 
-Ordinary licensed software may also be evaluated without a vendor submission. Such evaluation does not establish vendor participation or additional hosting rights. The [intake process](docs/intake.md) records the evidence supporting each permission.
+Ordinary licensed software may also be evaluated without a vendor submission. Such evaluation does not establish vendor participation or additional hosting rights. It supports a public laboratory result only when the public reproduction requirements are also satisfied. The [intake process](docs/intake.md) records the evidence supporting each permission.
 
 ## Reports and disputes
 

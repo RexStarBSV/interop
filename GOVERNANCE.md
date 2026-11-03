@@ -4,7 +4,7 @@
 
 PEER TO PEER PRIVACY SYSTEMS RESEARCH LLC (P2PPSR), an Oregon limited liability company, operates TPNIL and appoints its maintainers. Ty Everett is the initial maintainer. Maintainers manage technical requirements, contributions, releases, evaluation infrastructure and result corrections. Responsibilities grow through sustained contribution and sound judgment.
 
-The repository remains private until P2PPSR authorizes public release. TPNIL is independent of BSV Association. Participation does not establish organizational affiliation or authority to represent another party.
+The public laboratory was announced on November 2, 2026. P2PPSR authorizes laboratory releases and access decisions. TPNIL is independent of BSV Association. Participation does not establish organizational affiliation or authority to represent another party.
 
 ## Technical decisions
 

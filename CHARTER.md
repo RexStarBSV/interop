@@ -23,4 +23,4 @@ P2PPSR operates the laboratory under [GOVERNANCE.md](GOVERNANCE.md). Original pr
 
 Proprietary SUTs are welcome under the [submission terms](legal/ARTIFACT-SUBMISSION-AGREEMENT.md), without source disclosure or transfer of ownership. Those terms cover participation announcements and continued evaluation and hosting of identified submissions.
 
-Outputs remain experimental as recorded in [implementation status](docs/implementation-status.md). Conformance findings address only the evaluated behavior. Certification requires a separately established program. The repository remains private until P2PPSR authorizes release.
+Outputs remain experimental as recorded in [implementation status](docs/implementation-status.md). Conformance findings address only the evaluated behavior. Certification requires a separately established program. The repository is public. P2PPSR retains authority over laboratory releases and access decisions.

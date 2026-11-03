@@ -28,7 +28,7 @@
 | Android scheduling | Reproducible local AVD plus a repository-scoped KVM GitHub Actions runner using a digest-pinned non-root image and tokenless service account; workflow evidence is verified by repository code |
 | ISI-1 UHRP/CHIRP/LCH synthesis | Retained reference qualification passes signed PushDrop board creation and revision, canonical UHRP advertisement tokens and HTTP lookup, expiry/revocation/replay, two-host CHIRP availability and corruption handling, LCH payment/decryption, board overlay synchronization, and restart replay; imported standard corpora and negative cases also pass |
 | Complete Synthesis Board SUT run | The reference protocol and causally joined transaction infrastructure are qualified. A scored SUT result still requires the packaged browser application and an admitted external BRC-100 wallet to create the same transaction graph through their public interfaces, followed by the required repetitions and report |
-| GitHub enforced private branch protection | Unavailable on the current private-repository account plan |
+| Source branch protection | Not established in this release |
 | Signing, independent journal checkpoints, mirrors, certification marks | Not established |
 
 The self-test core produces `LAB_SELF_TEST_ONLY` results. Infrastructure runs produce `INFRASTRUCTURE_QUALIFICATION_ONLY` results. Intake review produces `INTAKE_REVIEW_ONLY` readiness reports. The Yours Wallet record is an `EXPERIMENTAL_CONFORMANCE_RESULT`; it is not certification. Certification remains unavailable.

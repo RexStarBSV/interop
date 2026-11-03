@@ -2,9 +2,9 @@
 
 [Implementation status](docs/implementation-status.md) records what has run and what remains unproven. This roadmap identifies the next work; individual profiles define their technical prerequisites. Failed or blocked assertions remain valid reported outcomes when the execution and evidence are sound.
 
-## Prepare public release
+## Complete public reproduction materials
 
-- Review repository contents, release assets, workflow logs and artifacts for confidential or operational data before changing visibility.
+- Review repository contents, release assets, workflow logs and artifacts for confidential or operational data for continuing public release maintenance.
 - Assemble a public reproduction bundle for an existing result: exact binaries, laboratory source snapshots, dependency versions, fixtures, configuration, evidence and instructions. Verify it from a clean environment without company credentials.
 - Record permissions for distributed artifacts under the [intake process](docs/intake.md). Original project contributions use Apache-2.0; vendor submissions use the [submission terms](legal/ARTIFACT-SUBMISSION-AGREEMENT.md). P2PPSR's Metanet Explorer acceptance is recorded; other submissions retain their own permission status.
 - Verify the public contribution and native-runner access boundaries, and keep the getting-started documentation consistent with the verified setup.

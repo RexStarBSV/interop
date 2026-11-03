@@ -28,7 +28,7 @@ Freeze overlay and storage HTTP contracts, add independent state oracles, and ex
 
 ## Complete the integrated application scenario
 
-The reference protocol and joined Teranode/Arcade/Merkle/ChainTracks transaction-service profile have retained qualifications. Complete the browser-delivered Synthesis Board and drive it through an admitted BRC-100 wallet so the application and wallet create the qualified board, UHRP and LCH transaction graph through their public interfaces. Repeat the profile and add independent component substitutions before reporting an ISI-1 SUT result.
+The reference protocol and joined Teranode/Broadcaster/Merkle/ChainTracks transaction-service profile have retained qualifications. Complete the browser-delivered Synthesis Board and drive it through an admitted BRC-100 wallet so the application and wallet create the qualified board, UHRP and LCH transaction graph through their public interfaces. Repeat the profile and add independent component substitutions before reporting an ISI-1 SUT result.
 
 [ISI-1 decision 0002](programs/ISI-1/decisions/0002-executable-profiles.md) describes the existing infrastructure boundary. A regtest service result and a production-wallet result retain their separate configurations and claims.
 

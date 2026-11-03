@@ -20,4 +20,4 @@ Initial families: availability/settings/capabilities; user identity/provider act
 
 ## Transaction services and content
 
-The transaction-service inventory pins Arcade's OpenAPI and event contract, including submission, transaction status, event stream, and selected header and proof routes. HTTP receipt, transaction acceptance, and mined status require distinct assertions. Merkle Service and ChainTracks retain separate versioned contracts, including in bundled distributions. BRC-26 UHRP, BRC-167 CHIRP, BRC-170 LCH and the chosen GlobalKVStore payload contract have separate oracles for location, content integrity, rights, payment and state.
+The transaction-service inventory pins Broadcaster's OpenAPI and event contract, including submission, transaction status, event stream, and selected header and proof routes. HTTP receipt, transaction acceptance, and mined status require distinct assertions. Merkle Service and ChainTracks retain separate versioned contracts, including in bundled distributions. BRC-26 UHRP, BRC-167 CHIRP, BRC-170 LCH and the chosen GlobalKVStore payload contract have separate oracles for location, content integrity, rights, payment and state.

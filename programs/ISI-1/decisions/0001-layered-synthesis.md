@@ -26,7 +26,7 @@ The application is a test instrument, not an oracle. Independent evaluators will
 3. **Content availability.** Publish deterministic fixture bytes to two complete hosts. Verify UHRP advertisement admission, lookup, expiry and revocation; CHIRP complete and range reads; corrupt-host rejection; and one-host outage recovery.
 4. **Licensed acquisition.** Verify LCH framing, identifiers, signatures, policy, offers, selection, segmented encryption, payment demands, receipts, key delivery, recovery, tamper rejection, and exact plaintext reconstruction. Exercise both receipt-complete settlement and the authorized-output offline-Payee path.
 5. **Overlay convergence.** Submit Global KVStore and UHRP transactions through the canonical HTTP overlay boundary, synchronize a second node from a clean state, and compare canonical topical UTXO projections.
-6. **Transaction lifecycle.** Submit through Arcade to Teranode, mine deterministically, acquire Merkle Service evidence, validate headers and proofs independently, and observe the wallet and overlay projections at declared causal barriers.
+6. **Transaction lifecycle.** Submit through Broadcaster to Teranode, mine deterministically, acquire Merkle Service evidence, validate headers and proofs independently, and observe the wallet and overlay projections at declared causal barriers.
 7. **Reference application.** Drive the Synthesis Board through two independent identities: publish a post containing an LCH header reference, acquire its image, decrypt and render it, restart the application, and reconstruct the same authoritative state.
 8. **Fault and substitution matrix.** Repeat with controlled outages, invalid transactions, double spends, corrupt content, stale advertisements, lost callbacks, service restarts, and one component substitution at a time.
 
@@ -43,7 +43,7 @@ The first complete run will:
 5. create a signed Global KVStore post record that references the LCH header;
 6. resolve the post from a second identity and validate the live KV token independently;
 7. inspect the LCH offer without spending, acquire a quote, and construct the exact declared BSV outputs through the BRC-100 boundary;
-8. submit the transaction through Arcade, observe Teranode acceptance, mine it, and validate the resulting proof and header relationship;
+8. submit the transaction through Broadcaster, observe Teranode acceptance, mine it, and validate the resulting proof and header relationship;
 9. complete the selected LCH settlement profile, recover the licensed key material, and decrypt the authenticated records;
 10. compare the rendered image bytes with the original fixture; and
 11. restart the client and supporting services, then reconstruct the same post, license, content, transaction, and proof relationships without a second payment.
@@ -54,7 +54,7 @@ The first fault companion will interrupt one Payee or evidence provider after th
 
 The run will retain the component digests, environment lock, funding and transaction graph, raw HTTP exchanges, overlay submissions and lookups, event timeline, LCH objects and settlement evidence, CHIRP nodes, UHRP advertisements, headers and Merkle proofs, wallet calls, final bytes, UI observations, and restart projections.
 
-The semantic projection will identify transaction states separately: wallet creation, Arcade receipt, processor acceptance or rejection, network observation, mining, proof availability, wallet internalization, overlay admission, and content-license completion. No one state stands in for another.
+The semantic projection will identify transaction states separately: wallet creation, Broadcaster receipt, processor acceptance or rejection, network observation, mining, proof availability, wallet internalization, overlay admission, and content-license completion. No one state stands in for another.
 
 ## Consequences
 

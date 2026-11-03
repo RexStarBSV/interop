@@ -8,15 +8,15 @@ The ISI-1 infrastructure is assembled from separately qualified profiles:
 
 - `synthesis/` is the reference protocol workbench. It exercises PushDrop board records, CHIRP/UHRP content, LCH acquisition, overlay synchronization, replay, and negative cases in process.
 - `profiles/teranode-regtest.json` pins the Teranode Quickstart source and every OCI image required by the controlled runtime. `scripts/prepare-teranode-runtime.mjs` creates a disposable, loopback-only Compose environment and a digest-bound runtime manifest.
-- `plans/arcade-merkle-chaintracks-synthetic.json` qualifies Arcade, the pinned Merkle Service image, and embedded ChainTracks through the complete proof lifecycle using deterministic synthetic block data.
-- `plans/arcade-real-teranode.json` qualifies direct Arcade submission and mining by the pinned Teranode runtime.
+- `plans/arcade-merkle-chaintracks-synthetic.json` qualifies Broadcaster, the pinned Merkle Service image, and embedded ChainTracks through the complete proof lifecycle using deterministic synthetic block data.
+- `plans/arcade-real-teranode.json` qualifies direct Broadcaster submission and mining by the pinned Teranode runtime.
 - `plans/arcade-real-teranode-merkle.json` joins those boundaries. Merkle Service consumes the exact native block and subtree objects from the live Teranode runtime, and the verifier checks the resulting proof against the actual block header root.
 - `plans/arcade-synthesis-board-teranode-merkle.json` repeats the joined path with revision 3 of the real mined Synthesis Board PushDrop token and a separately mined fee input.
 - `plans/arcade-uhrp-teranode-merkle.json` mines and proves the canonical signed UHRP advertisement for the board's CHIRP/LCH asset.
 - `plans/arcade-lch-teranode-merkle.json` mines and proves the receipt-complete, two-payee BRC-170 settlement that unlocks the same asset.
 - `plans/arcade-merkle-chaintracks-reorg.json` proves competing same-height headers, orphan-proof preservation, re-anchoring, and canonical reversion.
 - `plans/arcade-merkle-reprocess-recovery.json` proves missed-callback recovery for ten watched transactions against immutable Merkle Service v0.6.0. Its declared adapter validates and converts the source fixture's legacy zero coinbase placeholder to the current canonical `0xff` representation before execution.
-- `scripts/run-isi1-synthesis.mjs` starts a clean pinned runtime, executes and archives the Teranode qualification, derives each dependent signed transaction from the preceding result, runs the four Arcade/Teranode/Merkle stages, emits a joined result, and removes the runtime and volumes even on failure.
+- `scripts/run-isi1-synthesis.mjs` starts a clean pinned runtime, executes and archives the Teranode qualification, derives each dependent signed transaction from the preceding result, runs the four Broadcaster/Teranode/Merkle stages, emits a joined result, and removes the runtime and volumes even on failure.
 
 External-source plans run against a clean checkout at the declared commit. When an execution environment requires an adaptation, the plan names a patch under `adapters/`, binds its SHA-256 digest, and states its purpose. The component runner applies the patch only to a disposable `git archive`; the source checkout remains unchanged.
 

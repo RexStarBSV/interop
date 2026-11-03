@@ -19,6 +19,8 @@ All four programs select versioned ITCVE-1 profiles. ISI-4 uses the [production-
 
 [BSV Desktop 2.8.5](suts/intake/bsv-desktop-2.8.5.md) remains the reference desktop wallet candidate. [Yours Wallet 5.1.0](suts/intake/yours-wallet-5.1.0.md) is the first wallet with a retained experimental result. [Metanet Explorer 1.1.10](suts/intake/metanet-explorer-1.1.10-android.md) has a qualified Android artifact, four controlled-WAB native observations and an unresolved ToDo response boundary. [BSV Browser 1.6.1](suts/candidates/bsv-browser-1.6.1-source-candidate.md) has engineering evidence but awaits a publisher binary for admission. The canonical application artifact is the deterministic compiled `p2ppsr/todo-ts` web-root archive under `fixtures/artifacts/`.
 
+The transaction-submission role uses [BSV Broadcaster](https://github.com/bsv-blockchain/broadcaster). Current documentation uses that project name; retained evidence, source pins and artifact identifiers preserve their original byte identity.
+
 ## Run the offline core
 
 Use the Node.js version pinned in `.nvmrc` and Python 3. The core needs no npm dependencies or external services:

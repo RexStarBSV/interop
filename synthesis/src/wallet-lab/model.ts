@@ -45,7 +45,7 @@ export interface WalletLabResult {
   claim: 'EXPERIMENTAL_CONFORMANCE_RESULT'
   program: 'ISI-4@1.0.0'
   itcve: 'ITCVE-1@1.0.0'
-  profile: 'production-wallet-todo-controlled-services'
+  profile: 'production-wallet-todo-controlled-services' | 'desktop-wallet-todo-declared-fixture-hook'
   runId: string
   startedAt: string
   endedAt: string
@@ -61,11 +61,16 @@ export interface WalletLabResult {
     application: ArtifactIdentity
   }
   configuration: {
-    walletNetwork: 'mainnet'
+    walletNetwork: string
     publicMainnetBroadcast: false
     applicationOrigin: string
     controlledDestinations: string[]
     undeclaredEgress: 'blocked'
+    substrate?: 'brc100-http-json'
+    walletUrl?: string
+    promptAnswering?: 'attended' | 'declared-hook'
+    fixtureEnvironment?: 'controlled-services' | 'declared-hook'
+    walletSettings?: string[]
   }
   observations: {
     walletVersion: string

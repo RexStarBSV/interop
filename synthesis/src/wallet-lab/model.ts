@@ -47,7 +47,7 @@ export interface WalletLabResult {
   claim: WalletLabClaim
   program: 'ISI-4@1.0.0'
   itcve: 'ITCVE-1@1.0.0'
-  profile: 'production-wallet-todo-controlled-services' | 'desktop-wallet-todo-declared-fixture-hook'
+  profile: 'production-wallet-todo-controlled-services' | 'desktop-wallet-todo-controlled-services' | 'desktop-wallet-todo-declared-fixture-hook'
   runId: string
   startedAt: string
   endedAt: string

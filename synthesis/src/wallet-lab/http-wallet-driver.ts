@@ -163,7 +163,7 @@ async function controlledServicesEnvironment(webroot: string): Promise<FixtureEn
     alternateOrigin: 'https://alternate.itcve.test',
     browserArgs: [`--proxy-server=${services.proxyUrl}`, '--ignore-certificate-errors'],
     controlledDestinations: ['todo.itcve.test', 'alternate.itcve.test', 'deny.itcve.test', 'api.1sat.app'],
-    profile: 'production-wallet-todo-controlled-services' as const,
+    profile: 'desktop-wallet-todo-controlled-services' as const,
     routes: () => services.routes,
     storageBoundaryObserved: () => services.storageRpcObservations.some(item => item.completed),
     async fund(publicKey, satoshis) {
@@ -310,7 +310,7 @@ export class WalletRefusal extends Error {
 export function isPermissionRefusal(error: unknown): boolean {
   return error instanceof WalletRefusal && (
     error.status === 401 || error.status === 403 ||
-    (error.status === 400 && /denied|permission|not authorized|not allowed|forbidden|access refused/i.test(error.message))
+    (error.status === 400 && /denied|not authorized|not allowed|forbidden|access refused|permission (?:refused|rejected|required)/i.test(error.message))
   )
 }
 

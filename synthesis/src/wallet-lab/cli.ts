@@ -58,7 +58,7 @@ async function run(configPath: string): Promise<void> {
       (config.driver !== 'yours-extension' && config.driver !== 'http-desktop-wallet'))
     fail('Unsupported wallet-run configuration')
   if (!Number.isSafeInteger(config.repetitions) || config.repetitions < 2)
-    fail('A scored wallet run requires at least two repetitions')
+    fail('A wallet-run series requires at least two repetitions')
   const base = path.resolve(path.dirname(configPath), config.baseDirectory)
   const resolve = (value: string): string => path.resolve(base, value)
   if (config.driver === 'yours-extension') verifyArtifact(resolve(config.extensionArchive), config.walletArtifact)
@@ -101,7 +101,7 @@ async function run(configPath: string): Promise<void> {
   const repetitionMatch = projections.every(projection => projection === projections[0])
   const summary = {
     schema: 'tpnil-isi4-wallet-run-series@1.0.0',
-    claim: 'EXPERIMENTAL_CONFORMANCE_RESULT',
+    claim: results[0]!.claim,
     program: 'ISI-4@1.0.0',
     repetitions: results.map(result => ({
       runId: result.runId,

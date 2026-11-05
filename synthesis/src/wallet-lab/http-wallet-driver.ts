@@ -98,10 +98,34 @@ interface ListOutputProjection {
   beef?: number[]
 }
 
-interface Submission {
+export interface Submission {
   txid: string
   verdict: 'ACCEPTED_BY_NETWORK' | 'REJECTED'
   sha256?: string
+}
+
+/** Unknown or malformed fixture observations cannot establish a network verdict. */
+export function parseSubmissions(value: unknown): Submission[] {
+  if (!Array.isArray(value)) throw new Error('Fixture submissions hook returned no submission list')
+  return value.map(item => {
+    if (item === null || typeof item !== 'object') throw new Error('Malformed fixture submission')
+    const record = item as Record<string, unknown>
+    if (record.verdict !== 'REJECTED' && record.verdict !== 'ACCEPTED_BY_NETWORK')
+      throw new Error('Unknown fixture submission verdict')
+    if (typeof record.txid !== 'string' || !/^[0-9a-f]{64}$/i.test(record.txid))
+      throw new Error('Invalid fixture submission transaction id')
+    if (record.rawTx !== undefined) {
+      if (typeof record.rawTx !== 'string' || !/^(?:[0-9a-f]{2})+$/i.test(record.rawTx))
+        throw new Error('Invalid fixture submission transaction bytes')
+      if (Transaction.fromHex(record.rawTx).id('hex') !== record.txid.toLowerCase())
+        throw new Error('Fixture submission transaction id mismatch')
+    }
+    return {
+      txid: record.txid.toLowerCase(),
+      verdict: record.verdict,
+      ...(typeof record.rawTx === 'string' ? { sha256: sha256Hex(Uint8Array.from(Utils.toArray(record.rawTx, 'hex'))) } : {})
+    }
+  })
 }
 
 interface FundingResult {
@@ -224,16 +248,7 @@ function hookEnvironment(
       const reply = await client.request('fixture-submissions', 'GET', hook.submissionsUrl)
       if (reply.status !== 200) throw new Error(`Fixture submissions hook answered HTTP ${reply.status}`)
       const list = (reply.body as { submissions?: unknown } | null)?.submissions
-      if (!Array.isArray(list)) throw new Error('Fixture submissions hook returned no submission list')
-      return list.map(item => {
-        const record = item as Record<string, unknown>
-        const verdict = record.verdict === 'REJECTED' ? 'REJECTED' as const : 'ACCEPTED_BY_NETWORK' as const
-        return {
-          txid: String(record.txid ?? ''),
-          verdict,
-          ...(typeof record.rawTx === 'string' ? { sha256: sha256Hex(Uint8Array.from(Utils.toArray(record.rawTx, 'hex'))) } : {})
-        }
-      })
+      return parseSubmissions(list)
     },
     close: async () => undefined
   }
@@ -290,6 +305,13 @@ export class WalletRefusal extends Error {
     super(`${method} failed (HTTP ${status}): ${message}`)
     this.name = 'WalletRefusal'
   }
+}
+
+export function isPermissionRefusal(error: unknown): boolean {
+  return error instanceof WalletRefusal && (
+    error.status === 401 || error.status === 403 ||
+    (error.status === 400 && /denied|permission|not authorized|not allowed|forbidden|access refused/i.test(error.message))
+  )
 }
 
 /** A wallet call that throws on a non-success reply, as the SDK's HTTP JSON substrate does. */
@@ -409,7 +431,7 @@ export async function runHttpDesktopWallet(options: HttpWalletRunOptions): Promi
         return { refused: false, message: '' }
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error)
-        return { refused: error instanceof WalletRefusal, message }
+        return { refused: isPermissionRefusal(error), message }
       }
     }
     const listTodoOutputs = async (page: Page): Promise<ListOutputProjection> => {
@@ -509,6 +531,7 @@ export async function runHttpDesktopWallet(options: HttpWalletRunOptions): Promi
       ],
       limitations: [
         'The controlled fixture is not a public-mainnet UTXO or public-network acceptance claim.',
+        'Engineering observation only: wallet-process egress closure, installed artifact binding, and clean wallet reset between repetitions require separate intake evidence.',
         ...(options.networkDeviation === undefined
           ? []
           : [`The operator declared the ${options.networkDeviation.network} network instead of the mainnet profile: ${options.networkDeviation.reason}`])
@@ -802,7 +825,7 @@ export async function runHttpDesktopWallet(options: HttpWalletRunOptions): Promi
     evidence.addJson('declared-hooks.json', hooks.uses)
     const resultWithoutEvidence: Omit<WalletLabResult, 'evidence'> = {
       schema: 'tpnil-isi4-wallet-run@1.0.0',
-      claim: 'EXPERIMENTAL_CONFORMANCE_RESULT',
+      claim: 'ENGINEERING_OBSERVATION_ONLY',
       program: 'ISI-4@1.0.0',
       itcve: 'ITCVE-1@1.0.0',
       profile: env.profile,
@@ -819,10 +842,10 @@ export async function runHttpDesktopWallet(options: HttpWalletRunOptions): Promi
       artifacts: { wallet: options.walletArtifact, application: options.applicationArtifact },
       configuration: {
         walletNetwork: options.networkDeviation?.network ?? 'mainnet',
-        publicMainnetBroadcast: false,
+        publicMainnetBroadcast: 'not-observed',
         applicationOrigin: env.applicationOrigin,
         controlledDestinations: env.controlledDestinations,
-        undeclaredEgress: 'blocked',
+        undeclaredEgress: 'not-observed',
         substrate: 'brc100-http-json',
         walletUrl,
         promptAnswering: answerer.mode,
@@ -859,6 +882,16 @@ export async function runHttpDesktopWallet(options: HttpWalletRunOptions): Promi
       outcome: aggregateOutcome(vectors)
     }
     return evidence.write(resultWithoutEvidence)
+  } catch (error) {
+    await answerer.stop().catch(() => undefined)
+    evidence.addJson('attempt-failure.json', { startedAt, endedAt: new Date().toISOString(), error: error instanceof Error ? error.message : String(error) })
+    evidence.addJson('routes.json', environment?.routes() ?? [])
+    evidence.addJson('console-errors.json', consoleErrors)
+    evidence.addJson('wallet-trace.json', trace)
+    evidence.addJson('prompt-answering.json', answerer.describe())
+    evidence.addJson('declared-hooks.json', hooks.uses)
+    evidence.flush()
+    throw error
   } finally {
     await answerer.stop().catch(() => undefined)
     await browser?.close().catch(() => undefined)

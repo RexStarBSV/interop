@@ -1,5 +1,7 @@
 export type VectorOutcome = 'PASS' | 'FAIL' | 'BLOCKED' | 'INCONCLUSIVE' | 'NOT_APPLICABLE'
 
+export type WalletLabClaim = 'EXPERIMENTAL_CONFORMANCE_RESULT' | 'ENGINEERING_OBSERVATION_ONLY'
+
 export interface ArtifactIdentity {
   id: string
   version: string
@@ -42,7 +44,7 @@ export interface PermissionObservation {
 
 export interface WalletLabResult {
   schema: 'tpnil-isi4-wallet-run@1.0.0'
-  claim: 'EXPERIMENTAL_CONFORMANCE_RESULT'
+  claim: WalletLabClaim
   program: 'ISI-4@1.0.0'
   itcve: 'ITCVE-1@1.0.0'
   profile: 'production-wallet-todo-controlled-services' | 'desktop-wallet-todo-declared-fixture-hook'
@@ -62,10 +64,10 @@ export interface WalletLabResult {
   }
   configuration: {
     walletNetwork: string
-    publicMainnetBroadcast: false
+    publicMainnetBroadcast: false | 'not-observed'
     applicationOrigin: string
     controlledDestinations: string[]
-    undeclaredEgress: 'blocked'
+    undeclaredEgress: 'blocked' | 'not-observed'
     substrate?: 'brc100-http-json'
     walletUrl?: string
     promptAnswering?: 'attended' | 'declared-hook'

@@ -1,9 +1,12 @@
 import { createHash } from 'node:crypto'
+import fs from 'node:fs'
 import http from 'node:http'
 import type { AddressInfo } from 'node:net'
+import os from 'node:os'
+import path from 'node:path'
 import { P2PKH, PrivateKey, Transaction } from '@bsv/sdk'
 import { describe, expect, it } from 'vitest'
-import { BRC100_METHODS, probeMethodInventory } from '../src/wallet-lab/http-wallet-driver.js'
+import { BRC100_METHODS, isPermissionRefusal, parseSubmissions, probeMethodInventory, runHttpDesktopWallet, WalletRefusal } from '../src/wallet-lab/http-wallet-driver.js'
 import {
   AttendedPromptAnswerer,
   DeclaredHookClient,
@@ -15,7 +18,7 @@ import {
   requireLoopbackUrl
 } from '../src/wallet-lab/http-wallet-hooks.js'
 
-type Handler = (method: string, url: string, body: unknown) => { status: number; body: unknown }
+type Handler = (method: string, url: string, body: unknown) => { status: number; body: unknown; headers?: Record<string, string> }
 
 async function serve(handler: Handler): Promise<{ url: string; requests: Array<{ url: string; body: unknown; headers: http.IncomingHttpHeaders }>; close: () => Promise<void> }> {
   const requests: Array<{ url: string; body: unknown; headers: http.IncomingHttpHeaders }> = []
@@ -28,7 +31,7 @@ async function serve(handler: Handler): Promise<{ url: string; requests: Array<{
       requests.push({ url: request.url ?? '/', body, headers: request.headers })
       const reply = handler(request.method ?? 'GET', request.url ?? '/', body)
       const bytes = Buffer.from(JSON.stringify(reply.body))
-      response.writeHead(reply.status, { 'content-type': 'application/json', 'content-length': String(bytes.length) }).end(bytes)
+      response.writeHead(reply.status, { 'content-type': 'application/json', 'content-length': String(bytes.length), ...reply.headers }).end(bytes)
     })
   })
   await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve))
@@ -174,6 +177,79 @@ describe('desktop HTTP wallet prompt answering', () => {
     expect(() => createPromptAnswerer({ mode: 'declared-hook', hook: {
       documentation: 'remote', pendingUrl: 'http://192.0.2.1/pending', answerUrl: 'http://127.0.0.1/answer'
     } }, new DeclaredHookClient(), () => undefined)).toThrow(/loopback/)
+  })
+
+  it('records and rejects hook redirects without contacting the destination', async () => {
+    const destination = await serve(() => ({ status: 200, body: { prompts: [] } }))
+    const redirect = await serve(() => ({ status: 302, body: {}, headers: { location: destination.url } }))
+    try {
+      const client = new DeclaredHookClient()
+      await expect(client.request('redirect-test', 'GET', redirect.url)).rejects.toThrow()
+      expect(destination.requests).toHaveLength(0)
+      expect(client.uses).toHaveLength(1)
+      expect(client.uses[0]!.error).toBeTruthy()
+    } finally {
+      await redirect.close()
+      await destination.close()
+    }
+  })
+
+  it('rejects incomplete prompt observations before sending any answer', async () => {
+    const hook = await serve(() => ({ status: 200, body: { prompts: [{ id: 'p1', origin: 'https://todo.itcve.test' }] } }))
+    try {
+      const client = new DeclaredHookClient()
+      const answerer = new DeclaredHookPromptAnswerer(5_000, {
+        documentation: 'fixture hook', pendingUrl: hook.url, answerUrl: `${hook.url}/answer`
+      }, client)
+      await expect(answerer.pollOnce()).rejects.toThrow(/Malformed pending prompt/)
+      expect(answerer.permissions).toHaveLength(0)
+      expect(hook.requests).toHaveLength(1)
+    } finally {
+      await hook.close()
+    }
+  })
+})
+
+describe('desktop HTTP wallet evidence boundaries', () => {
+  it('distinguishes a permission refusal from unavailable methods and infrastructure errors', () => {
+    expect(isPermissionRefusal(new WalletRefusal('getPublicKey', 403, 'Forbidden'))).toBe(true)
+    expect(isPermissionRefusal(new WalletRefusal('getPublicKey', 400, 'User denied permission'))).toBe(true)
+    for (const error of [new Error('timeout'), new WalletRefusal('getPublicKey', 404, 'Not found'), new WalletRefusal('getPublicKey', 500, 'Permission service unavailable'), new WalletRefusal('getPublicKey', 400, 'Invalid key ID')])
+      expect(isPermissionRefusal(error)).toBe(false)
+  })
+
+  it('accepts only explicit fixture verdicts and binds supplied transaction bytes', () => {
+    const transaction = new Transaction()
+    transaction.addOutput({ satoshis: 2, lockingScript: new P2PKH().lock(PrivateKey.fromHex('44'.repeat(32)).toPublicKey().toAddress()) })
+    const txid = transaction.id('hex')
+    expect(parseSubmissions([{ txid, verdict: 'ACCEPTED_BY_NETWORK', rawTx: transaction.toHex() }, { txid, verdict: 'REJECTED' }]).map(item => item.verdict))
+      .toEqual(['ACCEPTED_BY_NETWORK', 'REJECTED'])
+    for (const verdict of [undefined, null, 'PENDING', 'accepted', true])
+      expect(() => parseSubmissions([{ txid, verdict }])).toThrow(/verdict/)
+    expect(() => parseSubmissions([null])).toThrow(/Malformed/)
+    expect(() => parseSubmissions([{ txid: '', verdict: 'REJECTED' }])).toThrow(/transaction id/)
+    expect(() => parseSubmissions([{ txid: 'aa'.repeat(32), verdict: 'ACCEPTED_BY_NETWORK', rawTx: transaction.toHex() }])).toThrow(/mismatch/)
+  })
+
+  it('preserves an aborted attempt without producing a completed result', async () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'tpnil-http-failure-'))
+    try {
+      const artifact = { id: 'fixture', version: '1', sha256: '00'.repeat(32), size: 0 }
+      await expect(runHttpDesktopWallet({
+        webroot: directory, outputDirectory: directory, walletArtifact: artifact, applicationArtifact: artifact,
+        expectedWalletVersion: 'fixture', browserExecutable: path.join(directory, 'missing-browser'),
+        prompts: { mode: 'attended' },
+        fixture: {
+          mode: 'declared-hook', applicationOrigin: 'http://127.0.0.1:9', denyOrigin: 'http://127.0.0.1:10', alternateOrigin: 'http://127.0.0.1:11',
+          hook: { documentation: 'unit fixture', fundUrl: 'http://127.0.0.1:9/fund', verdictUrl: 'http://127.0.0.1:9/verdict', submissionsUrl: 'http://127.0.0.1:9/submissions' }
+        }
+      })).rejects.toThrow(/executable/)
+      expect(fs.existsSync(path.join(directory, 'record.json'))).toBe(false)
+      expect(JSON.parse(fs.readFileSync(path.join(directory, 'evidence', 'attempt-failure.json'), 'utf8')).error).toMatch(/executable/)
+      expect(JSON.parse(fs.readFileSync(path.join(directory, 'evidence', 'declared-hooks.json'), 'utf8'))).toEqual([])
+    } finally {
+      fs.rmSync(directory, { recursive: true, force: true })
+    }
   })
 })
 

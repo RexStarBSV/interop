@@ -123,6 +123,7 @@ export class DeclaredHookClient {
         method,
         headers: { accept: 'application/json', ...(body === undefined ? {} : { 'content-type': 'application/json' }) },
         ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+        redirect: 'error',
         signal: AbortSignal.timeout(this.requestTimeoutMs)
       })
       const text = await response.text()
@@ -222,12 +223,15 @@ export class DeclaredHookPromptAnswerer implements PromptAnswerer {
     if (reply.status !== 200) throw new Error(`Prompt hook answered HTTP ${reply.status}`)
     const list = field(reply.body, this.hook.promptsField ?? 'prompts')
     if (!Array.isArray(list)) throw new Error('Prompt hook response holds no prompt list')
-    return list.map(item => ({
-      id: String(field(item, this.hook.idField ?? 'id')),
-      origin: String(field(item, this.hook.originField ?? 'origin') ?? 'unknown'),
-      kind: String(field(item, this.hook.kindField ?? 'kind') ?? 'permission'),
-      text: String(field(item, this.hook.textField ?? 'text') ?? '')
-    }))
+    return list.map(item => {
+      const id = field(item, this.hook.idField ?? 'id')
+      const origin = field(item, this.hook.originField ?? 'origin')
+      const text = field(item, this.hook.textField ?? 'text')
+      if (!((typeof id === 'string' && id.trim() !== '') || (typeof id === 'number' && Number.isFinite(id))) ||
+          typeof origin !== 'string' || origin.trim() === '' || typeof text !== 'string' || text.trim() === '')
+        throw new Error('Malformed pending prompt: id, origin and text are required')
+      return { id: String(id), origin, kind: String(field(item, this.hook.kindField ?? 'kind') ?? 'permission'), text }
+    })
   }
 
   async pollOnce(): Promise<void> {
